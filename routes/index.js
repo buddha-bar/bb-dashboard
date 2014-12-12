@@ -6,7 +6,7 @@ var OAuth = require('oauth');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Buddha Bar: Online Store Manager' });
 });
 
 
