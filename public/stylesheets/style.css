@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,6 +6,46 @@ a {
   color: #00B7FF;
 }
 
-h1 {
-    color: blue;
+/*.nav {
+  width: 100%;
+  background-color: blue;
+  height: 83px;
+/*  top: 0;
+  left: 0;
+  padding: 0;
+  width: 100%;*/
+
+.top-bar {
+  /*background-color: #fff;*/
+}
+
+
+
+/*
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.nav li {
+  float: left;
+}
+
+li:first-child {
+  margin-right: 400px;
+}
+
+li:last-child {
+  margin-left: 30%;
+}*/
+
+.clear {
+  clear: both;
 }
