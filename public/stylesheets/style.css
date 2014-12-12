@@ -17,10 +17,44 @@ a {
 
 .top-bar {
   /*background-color: #fff;*/
+  background-color: #063C54;
+  height: 70px;
 }
 
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  line-height: 70px;
+}
 
+.top-bar-section li:not(.has-form) a:not(.button) {
+  line-height: 70px;
+  background-color: #fff;
+  color: #000;
+}
 
+.top-bar .name h1 {
+  color: #363636;
+  font-size: 2em;
+}
+
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  background-color: #fa3c45;
+}
+
+.top-bar-section li.active:not(.has-form) a:not(.button):hover {
+  background-color: #ed2533;
+}
+
+.top-bar-section ul li > a {
+  font-size: 1em;
+}
+
+.top-bar .name h1 {
+  color: #fff;
+  padding-left: 15px;
+}
+.top-bar .name img {
+  padding-right: 20px;
+}
 /*
 .nav ul {
   margin: 0;
