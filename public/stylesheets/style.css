@@ -11,6 +11,11 @@ body {
   line-height: 70px;
 }
 
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+  background-color: #fafafa;
+  color: #000;
+}
+
 .top-bar-section li:not(.has-form) a:not(.button) {
   line-height: 70px;
   background-color: #fff;
