@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-var userSchema = mongoose.Schema({
+var User = mongoose.Schema({
     username: String,
     password: String,
-    tokens: {
-      amazon: String,
-      etsy: String,
-      ebay: String
+    items: [Item]
+    credentials: {
+      amazon: Object,
+      etsy: Object,
+      ebay: Object
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', User);
