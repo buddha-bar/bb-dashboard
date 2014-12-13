@@ -7,12 +7,25 @@
   <link rel="stylesheet" href='/libs/font-awesome/css/font-awesome.css'>
   <link rel="stylesheet" href='/libs/foundation/css/foundation.css'>
   <link rel="stylesheet" href='/stylesheets/style.css'>
+  <!-- include angular here -->
+  <script src="/modules/items/items.js"></script>
+  <script src="/modules/shops/shops.js"></script>
+  <script src="/modules/users/users.js"></script>
+  <script src="/modules/products/products.js"></script>
+
+
 </head>
 
 <body>
   <% include partials/topbar %>
-  <h1> Helloooo </h1>
-  <!-- <div ng-include="topbar.url"></div> -->
+  <div class="row">
+    <div class="large-6 columns etsy-container">
+      <% include partials/etsy-container %>
+    </div>
+    <div class="large-6 columns">
+      <% include partials/amazon-container %>
+    </div>
+  </div>
 
 </body>
 
