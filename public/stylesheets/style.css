@@ -2,6 +2,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+/* ==== TOP BAR/NAV ===== */
 .top-bar {
   background-color: #063C54;
   height: 70px;
@@ -45,4 +46,36 @@ body {
 }
 .top-bar .name img {
   padding-right: 20px;
+}
+
+
+/* ==== TOP BAR/NAV ===== */
+
+.etsy-container {
+  /*background-color: #000;*/
+}
+
+.store-utility-icons {
+  font-size: 2em;
+}
+
+.fa-refresh {
+  margin-left: 10px;
+}
+
+.store-container {
+  height: 100%;
+  border: 1px solid #000;
+  border-radius: 7px;
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+}
+
+.row {
+  max-width: 100%;
+}
+
+.clear {
+  clear: both;
 }

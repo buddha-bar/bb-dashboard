@@ -4,19 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var Users = require('./models/user');
+var Items = require('./models/item');
+
 var app = express();
+//set mongo db connection
+var db = mongoose.connection;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
-// app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-
-// app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -34,6 +37,12 @@ app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+
+// Make our db accessible to our router
+app.use(function(req, res, next){
+  req.db = db;
+  next();
 });
 
 // error handlers
