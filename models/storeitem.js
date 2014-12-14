@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var StoreItemSchema = mongoose.Schema({
+var StoreItem = mongoose.Schema({
     item_id: ObjectId,
     store_id: ObjectId,
     stock: Number,
