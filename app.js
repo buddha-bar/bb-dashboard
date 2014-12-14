@@ -44,6 +44,10 @@ app.use(session({
 }));
 
 app.use('/', routes);
+// app.get('/', function(req, res) {
+//   res.render('index', { title: 'Buddha Bar' })
+// });
+app.use('/test', routes);
 app.use('/users', users);
 app.use(express.static(path.join(__dirname, 'public')));
 
