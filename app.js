@@ -10,25 +10,23 @@ var MongoClient = require('mongodb').MongoClient;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var app = express();
+//set mongo db connection
+var db = mongoose.connection;
+
+mongoose.connect('mongodb://localhost:27017/test', function(err, db) {
+  if(!err) {
+    console.log("We are connected");
+  };
+}); 
+
 var Users = require('./models/user');
 var Items = require('./models/item');
 var Store = require('./models/store');
 var StoreItem = require('./models/storeitem');
 
-var app = express();
-//set mongo db connection
-var db = mongoose.connection; 
-// mongoose.connect('mongodb://localhost/test');
-MongoClient.connect("mongodb://localhost:27017/test", function(err, db) {
-  if(!err) {
-    console.log("We are connected");
-  }
-});
-// var MONGOHQ_URL="mongodb://localhost:27017/test" 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -47,6 +45,7 @@ app.use(session({
 app.get('/', function(req, res) {
   res.render('index', { title: 'Buddha Bar' })
 });
+
 app.use('/test', routes);
 app.use('/users', users);
 app.use(express.static(path.join(__dirname, 'public')));
