@@ -1,6 +1,10 @@
-<div ng-controller="ItemController as store" >
+<div class="item clearfix" ng-controller="ItemController as store" >
   <div ng-repeat="item in store.item">
     <img ng-src="{{item.img}}" />
-    <p>{{item.name}} <i> Stock level: {{item.stock}}</i></p>
+    <span>
+      <h2>{{item.name}}</h2>
+      <p> Stock level: {{item.stock}}</p>
+    </span>
+    <div class="clear"></div>
   </div>
 </div>

@@ -16,6 +16,11 @@
       name : 'name2',//query to db for name goes here
       stock : '6',//query to db
       img : '/images/bb-logo.png'//query to db
+    },
+    {
+      name : 'name3',//query to db for name goes here
+      stock : '6',//query to db
+      img : '/images/bb-logo.png'//query to db
     }
   ];
 

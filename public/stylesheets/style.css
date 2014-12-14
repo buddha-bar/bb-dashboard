@@ -65,8 +65,9 @@ body {
 
 .store-container {
   height: 91vh;
-  border: 1px solid #000;
-  border-radius: 7px;
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  /*border-radius: 7px;*/
   width: 100%;
   margin: 0;
   padding: 20px;
@@ -76,6 +77,7 @@ body {
   text-align: center;
   width: 100%;
   font-weight: 100;
+  margin-bottom: 20px;
 }
 
 .row {
@@ -84,4 +86,23 @@ body {
 
 .clear {
   clear: both;
+}
+
+/* ====== item ========= */
+
+.item img {
+  margin-right: 15px;
+  float: left;
+  margin-bottom: 20px;
+}
+p.ng-binding {
+  margin-bottom: 0;
+  float: left;
+  width: 80%;
+}
+
+h2.ng-binding {
+  font-size: 25px;
+  font-weight: 200;
+  width: 80%;
 }
