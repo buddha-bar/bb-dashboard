@@ -13,6 +13,8 @@ var users = require('./routes/users');
 
 var Users = require('./models/user');
 var Items = require('./models/item');
+var Store = require('./models/store');
+var StoreItem = require('./models/storeitem');
 
 var app = express();
 //set mongo db connection
