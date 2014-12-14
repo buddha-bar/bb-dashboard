@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -40,13 +39,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
     secret: 'something',
-    resave: false,
+    resave: true,
     saveUninitialized: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
