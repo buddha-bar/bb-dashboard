@@ -39,10 +39,10 @@ app.get('/authorise', function(req, res) {
     req.session.token = response.token;
     req.session.sec = response.tokenSecret;
     res.redirect('/find');
-    var userCredentials = {
-        user.token = response.token;
-        user.secret = response.secret;
-    };
+    // var userCredentials = {
+    //     user.token = response.token;
+    //     user.secret = response.secret;
+    // };
   });
 });
 
