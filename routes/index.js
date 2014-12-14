@@ -6,6 +6,8 @@ etsyjs = require('etsy-js');
 var router = express.Router();
 
 
+
+
 var client = etsyjs.client({
   key: 'glv40yg7ycl6czknj4f9v0xw',
   secret: 'w1udrm2cuk',
@@ -61,8 +63,16 @@ app.get('/find', function(req, res) {
     if (err) {
       console.log(err);
     }
-
-
+    var user = mongoose.model('User');
+    var user = new User({
+        credentials: {
+            etsy: {
+                userid: user_id,
+                usertoken: req.session.token,
+                usersecret: req.session.secret
+            }
+        }
+    })
     if (body) {
       console.dir(body);
       res.send(body.results[0]);
