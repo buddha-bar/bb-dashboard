@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var User = mongoose.Schema({
     username: String,
     password: String,
-    items: [Item]
+    // items: [Item],
     credentials: {
       amazon: Object,
       etsy: Object,
