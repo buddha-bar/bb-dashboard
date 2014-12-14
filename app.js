@@ -20,11 +20,6 @@ mongoose.connect('mongodb://localhost:27017/test', function(err, db) {
   };
 }); 
 
-var Users = require('./models/user');
-var Items = require('./models/item');
-var Store = require('./models/store');
-var StoreItem = require('./models/storeitem');
-
 // MongoClient.connect("mongodb://localhost:27017/test", function(err, db) {
 //   if(!err) {
 //     console.log("We are connected");
