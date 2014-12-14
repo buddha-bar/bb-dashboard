@@ -3,6 +3,8 @@ session = require('express-session');
 cookieParser = require('cookie-parser');
 url = require('url');
 etsyjs = require('etsy-js');
+var router = express.Router();
+
 
 var client = etsyjs.client({
   key: 'glv40yg7ycl6czknj4f9v0xw',
@@ -12,14 +14,20 @@ var client = etsyjs.client({
 
 app = express();
 app.use(cookieParser('secEtsy'));
-// app.use(session());
+app.use(session({
+    secret: 'something',
+    resave: true,
+    saveUninitialized: true
+}));
+//app.use(session());
 
 app.get('/', function(req, res) {
   client.requestToken(function(err, response) {
+    console.log(response);
     if (err) {
       return console.log(err);
     }
-
+    console.log(req.session.token);
     req.session.token = response.token;
     req.session.sec = response.tokenSecret;
     res.redirect(response.loginUrl);
@@ -65,10 +73,10 @@ app.get('/find', function(req, res) {
   });
 });
 
-server = app.listen(3000, function() {
+server = app.listen(8080, function() {
   console.log('Listening on port %d', server.address().port);
 });
 
 
 
-// module.exports = router;
+module.exports = router;
