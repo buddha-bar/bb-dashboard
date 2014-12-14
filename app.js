@@ -5,7 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var session = require('express-session')
+var session = require('express-session');
+var MongoClient = require('mongodb').MongoClient;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -15,7 +16,14 @@ var Items = require('./models/item');
 
 var app = express();
 //set mongo db connection
-var db = mongoose.connection;
+var db = mongoose.connection; 
+
+MongoClient.connect("mongodb://localhost:27017/test", function(err, db) {
+  if(!err) {
+    console.log("We are connected");
+  }
+});
+// var MONGOHQ_URL="mongodb://localhost:27017/test" 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
