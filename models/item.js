@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 
-var Item = mongoose.Schema({
-    name: String,
-    stock: Number
-});
+// var Items = mongoose.Schema({
+//     name: String,
+//     stock: Number
+// });
 
-module.exports = mongoose.model('Item', Item)
+// module.exports = mongoose.model('Items', Items)
 
 
-  
+//   
