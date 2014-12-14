@@ -3,6 +3,7 @@ session = require('express-session');
 cookieParser = require('cookie-parser');
 url = require('url');
 etsyjs = require('etsy-js');
+var mongoose = require('mongoose');
 var router = express.Router();
 
 
@@ -63,16 +64,24 @@ app.get('/find', function(req, res) {
     if (err) {
       console.log(err);
     }
-    var user = mongoose.model('User');
-    var user = new User({
+    var User = mongoose.model('User');
+    var newuser = new User({
         credentials: {
             etsy: {
-                userid: user_id,
+                userid: body.user_id,
                 usertoken: req.session.token,
                 usersecret: req.session.secret
             }
         }
-    })
+    });
+    newuser.save(function (err) {
+        if(!err){
+            console.log("save successful");
+        }
+        else {
+            console.log("save unsuccessful");
+        }
+    });
     if (body) {
       console.dir(body);
       res.send(body.results[0]);
