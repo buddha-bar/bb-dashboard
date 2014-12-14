@@ -19,9 +19,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-//app.use(session());
 
-app.get('/', function(req, res) {
+
+app.get('/test', function(req, res) {
   client.requestToken(function(err, response) {
     console.log(response);
     if (err) {
@@ -72,6 +72,7 @@ app.get('/find', function(req, res) {
     }
   });
 });
+
 
 server = app.listen(8080, function() {
   console.log('Listening on port %d', server.address().port);
