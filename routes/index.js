@@ -65,7 +65,7 @@ app.get('/find', function(req, res) {
   });
 });
 
-server = app.listen(8080, function() {
+server = app.listen(3000, function() {
   console.log('Listening on port %d', server.address().port);
 });
 
