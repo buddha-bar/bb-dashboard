@@ -1,0 +1,8 @@
+<div ng-app="dashboard">
+  <div ng-controller="ItemController as store" >
+    <div ng-repeat="item in store.items">
+      <img ng-src="{{item.img}}" />
+      <p>{{item.name}} <i> Stock level: {{item.stock}}</i></p>
+    </div>
+  </div>
+</div>
