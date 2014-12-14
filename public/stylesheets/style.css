@@ -1,6 +1,9 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+html, body {
+  height: 100%;
+}
 
 /* ==== TOP BAR/NAV ===== */
 .top-bar {

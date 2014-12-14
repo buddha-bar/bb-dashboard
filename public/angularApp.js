@@ -1,5 +1,6 @@
 (function(){
   var app = angular.module('dashboard', []);
+  
   app.controller('ItemController', function(){
     this.item = items;
   });
@@ -19,3 +20,6 @@
   ];
 
 })();
+
+
+db.test.find(); // { age: { $gt: 18 } }, { name: 1, stock: 1 } )
