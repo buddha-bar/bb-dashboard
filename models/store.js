@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var storeSchema = mongoose.Schema({
-    id: ,
+var Store = mongoose.Schema({
     name: String
     }
 });
