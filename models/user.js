@@ -1,15 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-// var Items = mongoose.Schema({
-//     name: String,
-//     stock: Number
-// });
 
 var User = mongoose.Schema({
     username: String,
     password: String,
     // item: [Items],
-    items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+    items: [{ type : Schema.ObjectId, ref : 'Item' }],
     credentials: {
       amazon: Object,
       etsy: Object,
