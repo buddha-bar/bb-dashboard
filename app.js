@@ -7,10 +7,12 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
+// var users = require('./routes/users');
+var fs = require('fs');
 var app = express();
+
+
 //set mongo db connection
 var db = mongoose.connection;
 
@@ -20,13 +22,25 @@ mongoose.connect('mongodb://localhost:27017/test', function(err, db) {
   };
 }); 
 
-var Users = require('./models/user');
-var Items = require('./models/item');
-var Store = require('./models/store');
-var StoreItem = require('./models/storeitem');
+//regan test
+require('./models/user');
+// require('./models/item');
+// require('./models/store');
+// require('./models/storeitem');
+
+var http    = require( 'http' );
+var path    = require( 'path' );
+var User    = mongoose.model( 'User' );
+
+// Bootstrap models
+var models_path = __dirname + '/models'
+fs.readdirSync(models_path).forEach(function (file) {
+  require(models_path+'/'+file)
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -41,14 +55,27 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// app.use('/', routes);
+// Attach Routes: 'index.js'
+require('./routes/index')(app);
+
+
 app.get('/', function(req, res) {
   res.render('index', { title: 'Buddha Bar' })
 });
+// app.use('/users', routes.index);
+// app.get('/', routes.index);
 
-app.use('/test', routes);
-app.use('/shops', routes);
-app.use('/users', users);
+// exports.index = function ( req, res ){
+//   User.find( function ( err, users, count ){
+//     res.render( 'index', {
+//       title : 'Buddha Bar',
+//       users : users
+//     });
+//   });
+// };
+
+
+// app.use('/users', users);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
@@ -90,3 +117,5 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
