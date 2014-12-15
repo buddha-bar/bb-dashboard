@@ -1,22 +1,11 @@
-express = require('express');
-session = require('express-session');
-cookieParser = require('cookie-parser');
-url = require('url');
-etsyjs = require('etsy-js');
+var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var url = require('url');
+var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 
 module.exports = function(app) {
-
-  // Should get all users
-  app.get('/users', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find(function(err, users){
-      if(err){ return next(err); }
-
-      res.json(users);
-      console.log(users);
-    });
-  });
 
   var client = etsyjs.client({
     key: 'glv40yg7ycl6czknj4f9v0xw',
@@ -132,4 +121,45 @@ module.exports = function(app) {
     });
     console.log("done all")
   });
+
+
+  //regan estract data from db (temp)
+
+  // Should get all users
+  app.get('/users', function(req, res, next) {
+    var User = mongoose.model('User');
+    User.find(function(err, users){
+      if(err){ return next(err); }
+
+      res.json(users);
+      console.log(users);
+    });
+  });
+
+  // Get user
+  app.get('/items', function(req, res, next) {
+    var User = mongoose.model('User');
+    User.find({username:'BillyBob'},function(err, foundItems){
+      if(err){ return next(err); }
+
+      res.json(foundItems);
+      console.log(foundItems);
+    });
+  });
+
+  // Should get all user items
+  app.get('/items', function(req, res, next) {
+    var User = mongoose.model('User');
+    User.find({username:'BillyBob','items[0]':req.params.query},function(err, foundItems){
+      if(err){ return next(err); }
+
+      res.json(foundItems);
+      console.log(foundItems);
+    });
+  });
+
+  // var billy = db.users.find( { "_id" : "548f38ef219b577ea273a691"} );
+  // var item1 = billy.items[0]
+  // console.log(billy);
+  // console.log(item1);
 };
