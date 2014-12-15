@@ -137,7 +137,7 @@ module.exports = function(app) {
   });
 
   // Get user
-  app.get('/items', function(req, res, next) {
+  app.get('/user', function(req, res, next) {
     var User = mongoose.model('User');
     User.find({username:'BillyBob'},function(err, foundItems){
       if(err){ return next(err); }
@@ -150,11 +150,13 @@ module.exports = function(app) {
   // Should get all user items
   app.get('/items', function(req, res, next) {
     var User = mongoose.model('User');
-    User.find({username:'BillyBob','items[0]':req.params.query},function(err, foundItems){
+    User.find({username:'BillyBob'},function(err, foundItems){
       if(err){ return next(err); }
 
-      res.json(foundItems);
-      console.log(foundItems);
+      // res.json(foundItems);
+      res.json({yelloo:'asd'});
+      // console.log(foundItems);
+      console.log(foundUsers);
     });
   });
 
