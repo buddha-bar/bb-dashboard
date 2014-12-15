@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var Item = mongoose.Schema({
     name: String,
-    stock: Number
+    stock: Number,
+    image: String
 });
 
 module.exports = mongoose.model('Item', Item)
