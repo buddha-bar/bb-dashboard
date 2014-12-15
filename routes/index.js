@@ -3,96 +3,77 @@ session = require('express-session');
 cookieParser = require('cookie-parser');
 url = require('url');
 etsyjs = require('etsy-js');
-var router = express.Router();
+// var mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
+module.exports = function(app) {
 
-var Users = require('../models/user');
-var Items = require('../models/item');
-var Store = require('../models/store');
-var StoreItem = require('../models/storeitem');
+  // Should get all users
+  app.get('/users', function(req, res, next) {
+    var User = mongoose.model('User');
+    User.find(function(err, users){
+      if(err){ return next(err); }
 
-// Should get all users
-router.get('/users', function(req, res, next) {
-  User.find(function(err, users){
-    if(err){ return next(err); }
-
-    res.json(users);
+      res.json(users);
+      console.log(users);
+    });
   });
-});
 
-var client = etsyjs.client({
-  key: 'glv40yg7ycl6czknj4f9v0xw',
-  secret: 'w1udrm2cuk',
-  callbackURL: 'http://localhost:8080/authorise'
-});
-
-app = express();
-app.use(cookieParser('secEtsy'));
-app.use(session({
-    secret: 'something',
-    resave: true,
-    saveUninitialized: true
-}));
-
-
-app.get('/test', function(req, res) {
-  client.requestToken(function(err, response) {
-    console.log(response);
-    if (err) {
-      return console.log(err);
-    }
-    console.log(req.session.token);
-    req.session.token = response.token;
-    req.session.sec = response.tokenSecret;
-    res.redirect(response.loginUrl);
+  var client = etsyjs.client({
+    key: 'glv40yg7ycl6czknj4f9v0xw',
+    secret: 'w1udrm2cuk',
+    callbackURL: 'http://localhost:8080/authorise'
   });
-});
 
-app.get('/authorise', function(req, res) {
-  // parse the query string for OAuth verifier
-  query = url.parse(req.url, true).query;
-  verifier = query.oauth_verifier;
 
-  // final part of OAuth dance, request access token and secret with given verifier
-  client.accessToken(req.session.token, req.session.sec, verifier, function(err, response) {
-    // update our session with OAuth token and secret
-    console.log('Error', err);
-    console.log('Response', response);
-    req.session.token = response.token;
-    req.session.sec = response.tokenSecret;
-    res.redirect('/find');
-    // var userCredentials = {
-    //     user.token = response.token;
-    //     user.secret = response.secret;
-    // };
+  app.get('/test', function(req, res) {
+    client.requestToken(function(err, response) {
+      console.log(response);
+      if (err) {
+        return console.log(err);
+      }
+      console.log(req.session.token);
+      req.session.token = response.token;
+      req.session.sec = response.tokenSecret;
+      res.redirect(response.loginUrl);
+    });
   });
-});
 
-app.get('/find', function(req, res) {
-  // we now have OAuth credentials for this session and can perform authenticated requests
-  console.log('sec', req.session.sec);
-  client.auth(req.session.token, req.session.sec).user("donaldballard1").addresses(function(err, body, headers) {
-    if (err) {
-      console.log(err);
-    }
+  app.get('/authorise', function(req, res) {
+    // parse the query string for OAuth verifier
+    query = url.parse(req.url, true).query;
+    verifier = query.oauth_verifier;
 
-
-    if (body) {
-      console.dir(body);
-      res.send(body.results[0]);
-    } else {
-      res.status(403);
-      res.send("Not Authorized");
-    }
+    // final part of OAuth dance, request access token and secret with given verifier
+    client.accessToken(req.session.token, req.session.sec, verifier, function(err, response) {
+      // update our session with OAuth token and secret
+      console.log('Error', err);
+      console.log('Response', response);
+      req.session.token = response.token;
+      req.session.sec = response.tokenSecret;
+      res.redirect('/find');
+      // var userCredentials = {
+      //     user.token = response.token;
+      //     user.secret = response.secret;
+      // };
+    });
   });
-});
+
+  app.get('/find', function(req, res) {
+    // we now have OAuth credentials for this session and can perform authenticated requests
+    console.log('sec', req.session.sec);
+    client.auth(req.session.token, req.session.sec).user("donaldballard1").addresses(function(err, body, headers) {
+      if (err) {
+        console.log(err);
+      }
 
 
-server = app.listen(8080, function() {
-  console.log('Listening on port %d', server.address().port);
-});
-
-
-
-module.exports = router;
+      if (body) {
+        console.dir(body);
+        res.send(body.results[0]);
+      } else {
+        res.status(403);
+        res.send("Not Authorized");
+      }
+    });
+  });
+}
