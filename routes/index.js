@@ -133,24 +133,3 @@ module.exports = function(app) {
     console.log("done all")
   });
 };
-// app.get('/shop', function(req, res) {
-//   var oauthSession;
-//   oauthSession = {
-//     token: req.session.token,
-//     secret: req.session.sec
-//   };
-//   console.log("fetching a shop...");
-//   return client.auth(oauthSession.token, oauthSession.secret).get('/shops/ParisienneLuxe', {}, function(err, status, body, headers) {
-//     if (err) {
-//       console.log(err);
-//     }
-//     if (body) {
-//       console.dir(body);
-//     }
-//     if (body) {
-//       return res.send(body.results[0].shop_name);
-//     }
-//   });
-// });
-
-
