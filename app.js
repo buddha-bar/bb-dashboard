@@ -23,14 +23,14 @@ mongoose.connect('mongodb://localhost:27017/test', function(err, db) {
 }); 
 
 //regan test
-require('./models/user');
+// require('./models/user');
 // require('./models/item');
 // require('./models/store');
 // require('./models/storeitem');
 
-var http    = require( 'http' );
-var path    = require( 'path' );
-var User    = mongoose.model( 'User' );
+// var http    = require( 'http' );
+// var path    = require( 'path' );
+// var User    = mongoose.model( 'User' );
 
 // Bootstrap models
 var models_path = __dirname + '/models'
@@ -116,7 +116,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
 
