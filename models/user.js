@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var User = mongoose.Schema({
     username: String,
     password: String,
-    // item: [Items],
     items: [{ type : Schema.ObjectId, ref : 'Item' }],
     credentials: {
       amazon: Object,
