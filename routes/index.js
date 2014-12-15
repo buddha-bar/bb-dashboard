@@ -6,7 +6,8 @@ etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 
 module.exports = function(app) {
-
+  var User = mongoose.model('User');
+  var Item = mongoose.model('Item');
   // Should get all users
   app.get('/users', function(req, res, next) {
     var User = mongoose.model('User');
@@ -51,10 +52,6 @@ module.exports = function(app) {
       req.session.token = response.token;
       req.session.sec = response.tokenSecret;
       res.redirect('/find');
-      // var userCredentials = {
-      //     user.token = response.token;
-      //     user.secret = response.secret;
-      // };
     });
   });
 
@@ -66,7 +63,6 @@ module.exports = function(app) {
         console.log(err);
       }
       console.log("creating user");
-      var User = mongoose.model('User');
       var newuser = new User({
          credentials: {
              etsy: {
@@ -76,7 +72,7 @@ module.exports = function(app) {
              }
          }
       });
-      console.log("done creating before save save");
+      console.log("done creating before save");
       newuser.save(function (err) {
         if(!err){
           console.log("user save successful");
@@ -94,7 +90,6 @@ module.exports = function(app) {
           res.send("Not Authorized");
         }     
       });
-    console.log("all done");
     });
 
   app.get('/shops',function(req, res){
@@ -107,21 +102,25 @@ module.exports = function(app) {
           console.log(err);
       }
       console.log("creating new item");
-      var Item = mongoose.model("Item");
-      var newItem = new Item({
+      
+      var newitem = new Item({
         name: body.title,
-        stock: body.quantity
+        stock: body.quantity,
+        image: "lalishdfio;awhet"
       });
-      console.log("done creating starting save");
-      newItem.save(function (err) {
-        if(!err){
-          console.log("item save successful");
+      //save the new item
+      
+      User.findOneAndUpdate({_id:'548e08ca89e002360ddb0d6d'}, {$push: {items: newitem}},
+        {safe: true, upsert: true},
+        function(err, model){ 
+        if (err) {
+          console.log(err);
         }
         else {
-          console.log("error during item save");
+        console.dir("working");
         }
       });
-      console.log("done saving");
+
       if (body) {
         console.dir(body);
         res.send(body.results[0]);
@@ -130,27 +129,7 @@ module.exports = function(app) {
         res.send("Not Authorized");
       }
     });
-    console.log("done all")
   });
 };
-// app.get('/shop', function(req, res) {
-//   var oauthSession;
-//   oauthSession = {
-//     token: req.session.token,
-//     secret: req.session.sec
-//   };
-//   console.log("fetching a shop...");
-//   return client.auth(oauthSession.token, oauthSession.secret).get('/shops/ParisienneLuxe', {}, function(err, status, body, headers) {
-//     if (err) {
-//       console.log(err);
-//     }
-//     if (body) {
-//       console.dir(body);
-//     }
-//     if (body) {
-//       return res.send(body.results[0].shop_name);
-//     }
-//   });
-// });
 
 
