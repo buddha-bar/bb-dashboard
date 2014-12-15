@@ -35,7 +35,9 @@ var User    = mongoose.model( 'User' );
 // Bootstrap models
 var models_path = __dirname + '/models'
 fs.readdirSync(models_path).forEach(function (file) {
-  require(models_path+'/'+file)
+  if (file.substr(-3) == '.js') {
+    require(models_path+'/'+file);
+  }
 });
 
 // view engine setup
