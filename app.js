@@ -47,6 +47,7 @@ app.get('/', function(req, res) {
 });
 
 app.use('/test', routes);
+app.use('/shops', routes);
 app.use('/users', users);
 app.use(express.static(path.join(__dirname, 'public')));
 

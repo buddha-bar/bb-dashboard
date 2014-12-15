@@ -85,12 +85,35 @@ app.get('/find', function(req, res) {
     if (body) {
       console.dir(body);
       res.send(body.results[0]);
+      // res.redirect('/shops');
     } else {
       res.status(403);
       res.send("Not Authorized");
     }
   });
+
 });
+
+app.get('/shops',function(req, res){
+    var params = {
+        include_private: true
+    }
+    console.log('sec', req.session.sec);
+    client.auth(req.session.token, req.session.sec).shop("buddhabarapp").featuredListings(function(err, body){
+        if (err) {
+            console.log(err);
+        }
+        if (body) {
+          console.dir(body);
+          res.send(body.results[0]);
+        } else {
+          res.status(403);
+          res.send("Not Authorized");
+        }
+    });
+});
+
+
 
 
 server = app.listen(8080, function() {
