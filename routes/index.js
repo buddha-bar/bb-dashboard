@@ -3,7 +3,7 @@ session = require('express-session');
 cookieParser = require('cookie-parser');
 url = require('url');
 etsyjs = require('etsy-js');
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 module.exports = function(app) {
 
