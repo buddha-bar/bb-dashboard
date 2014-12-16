@@ -12,6 +12,7 @@
   <script type="text/javascript" src="/libs/angular-resources.js"></script>
   <script type="text/javascript" src="/angularApp.js"></script>
   <script type="text/javascript" src="/resources/item.js"></script>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
 
@@ -33,7 +34,7 @@
 
   <section class='store-select'>
     <div class="wrapper-checkbox">
-    <h1>Where would you like to post?</h1>
+    <h1>Select Stores</h1>
     <div class="checkbox">
       <div class="figure-container">
         <div class="figure face"></div>
@@ -62,11 +63,26 @@
     
     <div class="submit">
       <div class="text">
-        <span>Add item to these stores</span>
+        <span>Add</span>
       </div>
     </div>
   </div>
-</section>  
+</section> 
+
+<script>
+$('.checkbox').on('click', function(){
+  
+   if($(this).find('.figure-container div').hasClass('clicked'))
+     {
+       
+       $(this).find('.figure-container div').addClass('face').removeClass('entypo-check clicked').animate('slow'); 
+       
+     }else{
+     
+   $(this).find('.figure-container div').removeClass('face').addClass('entypo-check clicked').animate('slow'); 
+    }
+});
+</script> 
 
 
 </body>
