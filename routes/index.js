@@ -126,7 +126,7 @@ module.exports = function(app) {
   //regan estract data from db (temp)
 
   // Should get all users
-  app.get('/users', function(req, res, next) {
+  app.get('api/users', function(req, res, next) {
     var User = mongoose.model('User');
     User.find(function(err, users){
       if(err){ return next(err); }
@@ -137,7 +137,7 @@ module.exports = function(app) {
   });
 
   // Get user
-  app.get('/user', function(req, res, next) {
+  app.get('api/user', function(req, res, next) {
     var User = mongoose.model('User');
     User.find({username:'BillyBob'},function(err, foundItems){
       if(err){ return next(err); }
@@ -148,15 +148,28 @@ module.exports = function(app) {
   });
 
   // Should get all user items
-  app.get('/items', function(req, res, next) {
+  app.get('/api/items', function(req, res, next) {
     var User = mongoose.model('User');
-    User.find({username:'BillyBob'},function(err, foundItems){
+    User.find({username:'BillyBob'},function(err, user){
       if(err){ return next(err); }
 
-      // res.json(foundItems);
-      res.json({yelloo:'asd'});
-      // console.log(foundItems);
-      console.log(foundUsers);
+      console.log(user);
+
+
+      var user = user[0];
+      // var itemsList = user.items;
+      // var items = [];
+
+      // for(var key in itemsList) {
+      //   console.log('key is '+key);
+      //   items.push(itemsList[key]);
+
+      //   items << itemsList[key]
+      // }
+
+      res.json(user.items);
+      // console.log(user);
+      // console.log(items);
     });
   });
 
