@@ -94,6 +94,7 @@ body {
   margin-right: 15px;
   float: left;
   margin-bottom: 20px;
+  width: 80px;
 }
 p.ng-binding {
   margin-bottom: 0;
@@ -102,7 +103,7 @@ p.ng-binding {
 }
 
 h2.ng-binding {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 200;
   width: 80%;
 }

@@ -153,28 +153,9 @@ module.exports = function(app) {
     User.find({username:'BillyBob'},function(err, user){
       if(err){ return next(err); }
 
-      console.log(user);
-
-
       var user = user[0];
-      // var itemsList = user.items;
-      // var items = [];
-
-      // for(var key in itemsList) {
-      //   console.log('key is '+key);
-      //   items.push(itemsList[key]);
-
-      //   items << itemsList[key]
-      // }
-
       res.json(user.items);
-      // console.log(user);
-      // console.log(items);
     });
   });
 
-  // var billy = db.users.find( { "_id" : "548f38ef219b577ea273a691"} );
-  // var item1 = billy.items[0]
-  // console.log(billy);
-  // console.log(item1);
 };

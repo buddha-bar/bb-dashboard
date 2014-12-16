@@ -1,3 +1,6 @@
 angular.module('dashboard').factory('Item', function($resource){
-  return $resource('/api/items')
+  // console.log('Item resource initialized');
+  return $resource('/api/items');
+
+  //{ 'query':  {method:'GET', isArray:true} }
 });
