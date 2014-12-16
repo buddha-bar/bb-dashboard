@@ -4,8 +4,23 @@ var cookieParser = require('cookie-parser');
 var url = require('url');
 var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
+var bEtsy = require('../lib/buddhaetsy');
 
 module.exports = function(app) {
+
+  var User = mongoose.model('User');
+  var Item = mongoose.model('Item');
+  // Should get all users
+  app.get('/users', function(req, res, next) {
+    var User = mongoose.model('User');
+    User.find(function(err, users){
+      if(err){ return next(err); }
+
+      res.json(users);
+      console.log(users);
+    });
+  });
+
 
   var client = etsyjs.client({
     key: 'glv40yg7ycl6czknj4f9v0xw',
@@ -15,6 +30,7 @@ module.exports = function(app) {
 
 
   app.get('/test', function(req, res) {
+    var scope = '?scope=listing_w';
     client.requestToken(function(err, response) {
       console.log(response);
       if (err) {
@@ -39,89 +55,88 @@ module.exports = function(app) {
       console.log('Response', response);
       req.session.token = response.token;
       req.session.sec = response.tokenSecret;
-      res.redirect('/find');
-      // var userCredentials = {
-      //     user.token = response.token;
-      //     user.secret = response.secret;
-      // };
+      res.redirect('/api/etsy/find');
     });
   });
 
-  app.get('/find', function(req, res) {
-    // we now have OAuth credentials for this session and can perform authenticated requests
-    console.log('sec', req.session.sec);
-    client.auth(req.session.token, req.session.sec).user("donaldballard1").addresses(function(err, body, headers) {
-      if (err) {
+  app.get('/api/etsy/find', function(req, res) {
+      bEtsy.getUsersEtsyInfo(req, res, function(err, body){
+        if (err) {
+          console.log(err);
+        }
+        res.json(body);
+        console.log(req.session.token);
+        console.log(req.session.sec);
+        var newuser = new User({
+          credentials: {
+            etsy: {
+              userid: body.user_id,
+              usertoken: req.session.token,
+              usersecret: req.session.secret
+            }
+          }
+        })
+
+        newuser.save(function (err) {
+          if(!err){
+            console.dir(newuser);
+          }
+          else {
+            console.log(err);
+          }
+        });
+      });
+      //   if (body) {
+      //     console.dir(body);
+      //     res.send(body.results[0]);
+      //   } else {
+      //     res.status(403);
+      //     res.send("Not Authorized");
+      //   }     
+      // });
+    });
+
+  app.get('/api/etsy/getItemCount',function(req, res){
+    bEtsy.getItemCount(req, res, function(err, body){
+      if(err){
         console.log(err);
       }
-      console.log("creating user");
-      var User = mongoose.model('User');
-      var newuser = new User({
-         credentials: {
-             etsy: {
-                userid: body.user_id,
-                usertoken: req.session.token,
-                usersecret: req.session.secret
-             }
-         }
-      });
-      console.log("done creating before save save");
-      newuser.save(function (err) {
-        if(!err){
-          console.log("user save successful");
-        }
-        else {
-          console.log("error during user save");
-        }
-      });
-      console.log("after save and printing body ");
-        if (body) {
-          console.dir(body);
-          res.send(body.results[0]);
-        } else {
-          res.status(403);
-          res.send("Not Authorized");
-        }     
-      });
-    console.log("all done");
+      res.json(body.count);
     });
-
-  app.get('/shops',function(req, res){
-    var listings = {
-        
-        include_private: true
-    }
-    client.auth(req.session.token, req.session.sec).get('/shops/buddhabarapp/listings/active', listings, function(err, status, body, headers){
-      if (err) {
-          console.log(err);
-      }
-      console.log("creating new item");
-      var Item = mongoose.model("Item");
-      var newItem = new Item({
-        name: body.title,
-        stock: body.quantity
-      });
-      console.log("done creating starting save");
-      newItem.save(function (err) {
-        if(!err){
-          console.log("item save successful");
-        }
-        else {
-          console.log("error during item save");
-        }
-      });
-      console.log("done saving");
-      if (body) {
-        console.dir(body);
-        res.send(body.results[0]);
-      } else {
-        res.status(403);
-        res.send("Not Authorized");
-      }
-    });
-    console.log("done all")
   });
 
+  app.get('/api/etsy/updateItemCount', function(req, res){
+    bEtsy.updateItemCount(req, res, function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
+    });
+  });
+
+  app.get('/api/etsy/getListings',function(req, res){
+    //returns a list of active listings from the users shop.
+    // can do this and put call back in all listings instead  
+    // callback = function(err, body){
+    // };
+    bEtsy.getAllListings(req, res, function(err, body) {
+        if(err) {
+          console.log(err);
+        }
+        res.json(body);
+    });
+  });
+    // Potentially necesary for updating info in db.
+    //   User.findOneAndUpdate({_id:'548e08ca89e002360ddb0d6d'}, {$push: {items: newitem}},
+    //     {safe: true, upsert: true},
+    //     function(err, model){ 
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //     else {
+    //     console.dir("working");
+    //     }
+    //   });
 
   //regan estract data from db (temp)
 
@@ -158,4 +173,6 @@ module.exports = function(app) {
     });
   });
 
+
 };
+
