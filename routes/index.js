@@ -5,11 +5,14 @@ var url = require('url');
 var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 var bEtsy = require('../lib/buddhaetsy');
+var etsy = require('../lib/etsy');
 
 module.exports = function(app) {
 
   var User = mongoose.model('User');
   var Item = mongoose.model('Item');
+  var client = etsy.getClient();
+
   // Should get all users
   app.get('/users', function(req, res, next) {
     var User = mongoose.model('User');
@@ -21,16 +24,7 @@ module.exports = function(app) {
     });
   });
 
-
-  var client = etsyjs.client({
-    key: 'glv40yg7ycl6czknj4f9v0xw',
-    secret: 'w1udrm2cuk',
-    callbackURL: 'http://localhost:3000/authorise'
-  });
-
-
   app.get('/test', function(req, res) {
-    var scope = '?scope=listing_w';
     client.requestToken(function(err, response) {
       console.log(response);
       if (err) {
@@ -60,41 +54,33 @@ module.exports = function(app) {
   });
 
   app.get('/api/etsy/find', function(req, res) {
-      bEtsy.getUsersEtsyInfo(req, res, function(err, body){
-        if (err) {
+    bEtsy.getUsersEtsyInfo(req, res, function(err, body){
+      if (err) {
+        console.log(err);
+      }
+      res.json(body);
+      console.log(req.session.token);
+      console.log(req.session.sec);
+      var newuser = new User({
+        credentials: {
+          etsy: {
+            userid: body.user_id,
+            usertoken: req.session.token,
+            usersecret: req.session.secret
+          }
+        }
+      })
+
+      newuser.save(function (err) {
+        if(!err){
+          console.dir(newuser);
+        }
+        else {
           console.log(err);
         }
-        res.json(body);
-        console.log(req.session.token);
-        console.log(req.session.sec);
-        var newuser = new User({
-          credentials: {
-            etsy: {
-              userid: body.user_id,
-              usertoken: req.session.token,
-              usersecret: req.session.secret
-            }
-          }
-        })
-
-        newuser.save(function (err) {
-          if(!err){
-            console.dir(newuser);
-          }
-          else {
-            console.log(err);
-          }
-        });
       });
-      //   if (body) {
-      //     console.dir(body);
-      //     res.send(body.results[0]);
-      //   } else {
-      //     res.status(403);
-      //     res.send("Not Authorized");
-      //   }     
-      // });
     });
+  });
 
   app.get('/api/etsy/getItemCount',function(req, res){
     bEtsy.getItemCount(req, res, function(err, body){
@@ -107,9 +93,7 @@ module.exports = function(app) {
 
   app.get('/api/etsy/updateItemCount', function(req, res){
     bEtsy.updateItemCount(req, res, function(err, body){
-      if(err){
-        console.log(err);
-      }
+      res.send(body.results[0]);
       res.json(body);
     });
   });
@@ -120,10 +104,7 @@ module.exports = function(app) {
     // callback = function(err, body){
     // };
     bEtsy.getAllListings(req, res, function(err, body) {
-        if(err) {
-          console.log(err);
-        }
-        res.json(body);
+      res.json(body);
     });
   });
     // Potentially necesary for updating info in db.
@@ -164,6 +145,7 @@ module.exports = function(app) {
 
   // Should get all user items
   app.get('/api/items', function(req, res, next) {
+    console.log("asdf why am I getting called?");
     var User = mongoose.model('User');
     User.find({username:'BillyBob'},function(err, user){
       if(err){ return next(err); }
@@ -172,7 +154,5 @@ module.exports = function(app) {
       res.json(user.items);
     });
   });
-
-
 };
 
