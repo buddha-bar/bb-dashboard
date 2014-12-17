@@ -1,10 +1,6 @@
-<section class="store-select" ng-show="tab.isSet(2)">
+<section class="store-select">
     <div class="wrapper-checkbox">
     <h2>Select Stores</h2>
-
-    <!-- <li ng-class="{ active: tab.isSet(1) }">
-        <a href ng-click="tab.setTab(1)">Dashboard</a>
-      </li> -->
 
     <section ng-class="{ active: post.isSet(1) }">
       <a href ng-click="post.setPost(1)">
@@ -44,9 +40,6 @@
     </div>
   </div>
 </section> 
-
-<div etsyForm></div>
-
 
 <script>
   $('.checkbox').on('click', function(){

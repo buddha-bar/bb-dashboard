@@ -20,7 +20,7 @@
   });
 
   app.controller('PostController', function(){
-    this.post = 1;
+    // this.post = 1;
 
     this.setPost = function(newValue){
       this.post = newValue;
@@ -49,7 +49,7 @@
     return {
       templateUrl: '/veiws/topbar.ejs'
     };
-  });
+  }); 
 
   app.directive('dashboard', function() {
     return {
@@ -57,15 +57,21 @@
     };
   });
 
-  app.directive('etsyForm', function() {
+  app.directive('postItem', function() {
     return {
-      templateUrl: '/veiws/etsy-form.ejs'
+      templateUrl: '/veiws/post-item.ejs'
     };
-  });
+  }); 
 
   app.directive('selectMenu', function() {
     return {
       templateUrl: '/veiws/select-menu.ejs'
+    };
+  });
+
+  app.directive('etsyForm', function() {
+    return {
+      templateUrl: '/veiws/etsy-form.ejs'
     };
   });
 
