@@ -1,7 +1,86 @@
 <form>
+  <h1>Etsy form</h1>
+
+  <div class="select-group" id="who-made">
+    <h4>Who made it?</h4>           
+      <select name="property[whomade]">
+        <option value="">Select a maker...</option>
+        <option value="1" >I did</option>
+        <option value="2" >A member of my shop</option>
+        <option value="3" >Another company or person</option>
+    </select>
+  </div>
+
+  <div id="categories-container" class="clear">
+    <label for="categories">Categories</label>
+    <input type="hidden" name="property[category]" value=""/>
+    <div class="select-group" id="category-selector-1" data-category-depth="1">
+      <h4>What is it?</h4>
+      <select name="category-selector-select-1">
+        <option value="">Select a category...</option>
+        <option data-children="27" value="69150467">Accessories</option>
+        <option data-children="12" value="68887312">Art</option>
+        <option data-children="12" value="69150455">Bags and Purses</option>
+        <option data-children="13" value="68887336">Bath and Beauty</option>
+        <option data-children="6" value="69150385">Books and Zines</option>
+        <option data-children="16" value="69150375">Candles</option>
+        <option data-children="19" value="69150451">Ceramics and Pottery</option>
+        <option data-children="10" value="69150405">Children</option>
+        <option data-children="26" value="69150353">Clothing</option>
+        <option data-children="11" value="69150341">Crochet</option>
+        <option data-children="18" value="69150415">Dolls and Miniatures</option>
+        <option data-children="10" value="68887416">Everything Else</option>
+        <option data-children="12" value="68887430">Furniture</option>
+        <option data-children="17" value="69150359">Geekery</option>
+        <option data-children="21" value="69150361">Glass</option>
+        <option data-children="11" value="68887366">Holidays</option>
+        <option data-children="25" value="69150425">Housewares</option>
+        <option data-children="8" value="68887482">Jewelry</option>
+        <option data-children="16" value="68887400">Knitting</option>
+        <option data-children="10" value="68887460">Music</option>
+        <option data-children="13" value="68887406">Needlecraft</option>
+        <option data-children="14" value="69150367">Paper Goods</option>
+        <option data-children="17" value="68887486">Patterns</option>
+        <option data-children="20" value="68887434">Pets</option>
+        <option data-children="13" value="68887346">Plants and Edibles</option>
+        <option data-children="15" value="68887502">Quilts</option>
+        <option data-children="10" value="69150433">Supplies</option>
+        <option data-children="16" value="69150393">Toys</option>
+        <option data-children="15" value="69150437">Vintage</option>
+        <option data-children="20" value="68887494">Weddings</option>
+        <option data-children="22" value="68887388">Woodworking</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="select-group  inactive " id="is-supply">
+    <h4>What is it?</h4>                
+    <select name="property[issupply]" disabled="disabled">
+      <option value="">Select a use...</option>
+      <option value="0" >A finished product</option>
+      <option value="1" >A supply or tool to make things</option>
+    </select>
+  </div>
+  
+</form>
+
+<!-- 
+<div class="row">
+    <div class="large-12 columns">
+      <h3> About this Item </h3>
+      <label>Who made it?
+        <select placeholder="Select a maker">
+          <option value="husker">I did</option>
+          <option value="starbuck">A member of my shop</option>
+          <option value="hotdog">Another company or person</option>
+        </select>
+      </label>
+    </div>
+  </div>
   <div class="row">
     <div class="large-12 columns">
-      <label>Input Label
+      
+      <label>
         <input type="text" placeholder="large-12.columns" />
       </label>
     </div>
@@ -59,5 +138,4 @@
         <textarea placeholder="small-12.columns"></textarea>
       </label>
     </div>
-  </div>
-</form>
+  </div> -->
