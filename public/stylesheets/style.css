@@ -122,7 +122,8 @@ h3.ng-binding {
 
 .wrapper-checkbox {
   width: 300px;
-  margin: 0 auto;
+  margin-left:  20px;
+  /*margin: 0 auto;*/
   padding-top: 50px;
   padding-bottom: 50px;
 }
@@ -167,7 +168,7 @@ h2 {
   height: 60px;
   width: 100%;
   position: relative;
-  background: #F7F7F5;
+  background: #eee; /*F7F7F5*/
   display: inline-block;
   margin: 15px 2% 15px;
   border-radius: 2px;
@@ -253,8 +254,7 @@ h2 {
   
 }
 .submit:hover {
-  background: #b8cdba;
-  color: #1e2b1f;
+  background: #30c076;
 }
 
 .clicked {
