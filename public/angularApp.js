@@ -19,37 +19,49 @@
 
   });
 
-  .directive('topbar', function() {
+  app.controller('TabController', function(){
+    this.tab = 1;
+
+    this.setTab = function(newValue){
+      this.tab = newValue;
+    };
+
+    this.isSet = function(tabName){
+      return this.tab === tabName;
+    };
+  });
+
+  app.directive('topbar', function() {
     return {
       templateUrl: '/veiws/topbar.ejs'
     };
   });
 
-  .directive('dashboard', function() {
+  app.directive('dashboard', function() {
     return {
       templateUrl: '/veiws/dashboard.ejs'
     };
   });
 
-  .directive('selectMenu', function() {
+  app.directive('selectMenu', function() {
     return {
-      templateUrl: '/veiws/selectMenu.ejs'
+      templateUrl: '/veiws/select-menu.ejs'
     };
   });
 
-  .directive('etsyContainer', function() {
+  app.directive('etsyContainer', function() {
     return {
       templateUrl: '/veiws/etsy-container.ejs'
     };
   });
 
-  .directive('amazonContainer', function() {
+  app.directive('amazonContainer', function() {
     return {
       templateUrl: '/veiws/amazon-container.ejs'
     };
   });
 
-  .directive('ebayContainer', function() {
+  app.directive('ebayContainer', function() {
     return {
       templateUrl: '/veiws/ebay-container.ejs'
     };

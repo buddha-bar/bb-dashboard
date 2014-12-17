@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <!-- jQuery -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src=""></script>
+  <script src="scripts/menu-select.js"></script>
   <!-- include angular here -->
   <script type="text/javascript" src="/libs/angular/angular.js"></script>
   <script type="text/javascript" src="/libs/modernizr/modernizr.js"></script>
   <script type="text/javascript" src="/libs/angular-resources.js"></script>
+  <script type="text/javascript" src="/libs/angular-route/angular-route.js"></script>
   <script type="text/javascript" src="/angularApp.js"></script>
   <script type="text/javascript" src="/resources/item.js"></script>
    
@@ -20,24 +21,11 @@
 </head>
 
 <body>
-  <div topbar></div>
-  <div dashboard></div>
-  <div post-item></div>
-
-  <% include partials/topbar %>
-  <div class="row collapse">
-    <div class="large-4 columns etsy-container">
-      <% include partials/etsy-container %>
-    </div>
-    <div class="large-4 columns">
-      <% include partials/amazon-container %>
-    </div>
-    <div class="large-4 columns">
-      <% include partials/ebay-container %>
-
-    </div>
-  </div>
-
+  <section ng-controller="TabController as tab">
+    <div topbar></div>
+    <div dashboard></div>
+    <div select-menu></div>
+  </selection>
 
 </body>
 </html>

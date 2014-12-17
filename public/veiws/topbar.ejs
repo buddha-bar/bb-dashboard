@@ -1,4 +1,4 @@
-<nav class="top-bar" data-topbar role="navigation">
+<nav class="top-bar" role="navigation">
   <ul class="title-area">
     <li class="name">
       <h1><img src="/images/bb-logo.png" />Buddha Bar</h1>
@@ -8,7 +8,9 @@
 
   <section class="top-bar-section">
     <ul class="right">
-      <li class="active"><a href="#">Post New Item!</a></li>
+      <li class="active" ng-class="{ active: tab.isSet(2) }">
+        <a href ng-click="tab.setTab(2)">Post New Item!</a>
+      </li>
       <li class="has-dropdown">
         <a href="#">Username</a>
         <ul class="dropdown">
