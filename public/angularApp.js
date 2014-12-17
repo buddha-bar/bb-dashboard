@@ -19,24 +19,41 @@
 
   });
 
-    //need to loop through items in DB for now using these test objects
-    // var items = [
-    //   {
-    //     name : 'name1',//query to db for name goes here
-    //     stock : '4',//query to db
-    //     img : '/images/bb-logo.png'//query to db
-    //   },
-    //   {
-    //     name : 'name2',//query to db for name goes here
-    //     stock : '6',//query to db
-    //     img : '/images/bb-logo.png'//query to db
-    //   },
-    //   {
-    //     name : 'name3',//query to db for name goes here
-    //     stock : '6',//query to db
-    //     img : '/images/bb-logo.png'//query to db
-    //   }
-    // ];
+  .directive('topbar', function() {
+    return {
+      templateUrl: '/veiws/topbar.ejs'
+    };
+  });
+
+  .directive('dashboard', function() {
+    return {
+      templateUrl: '/veiws/dashboard.ejs'
+    };
+  });
+
+  .directive('selectMenu', function() {
+    return {
+      templateUrl: '/veiws/selectMenu.ejs'
+    };
+  });
+
+  .directive('etsyContainer', function() {
+    return {
+      templateUrl: '/veiws/etsy-container.ejs'
+    };
+  });
+
+  .directive('amazonContainer', function() {
+    return {
+      templateUrl: '/veiws/amazon-container.ejs'
+    };
+  });
+
+  .directive('ebayContainer', function() {
+    return {
+      templateUrl: '/veiws/ebay-container.ejs'
+    };
+  });
 
 })();
 
