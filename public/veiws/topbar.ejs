@@ -8,6 +8,9 @@
 
   <section class="top-bar-section">
     <ul class="right">
+      <li ng-class="{ active: tab.isSet(1) }">
+        <a href ng-click="tab.setTab(1)">Dashboard</a>
+      </li>
       <li class="active" ng-class="{ active: tab.isSet(2) }">
         <a href ng-click="tab.setTab(2)">Post New Item!</a>
       </li>

@@ -67,6 +67,12 @@
     };
   });
 
+  app.directive('item', function() {
+    return {
+      templateUrl: '/veiws/item.ejs'
+    };
+  });
+
 })();
 
 
