@@ -6,17 +6,23 @@
   <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="/libs/foundation/css/foundation.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <!-- jQuery -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src=""></script>
   <!-- include angular here -->
   <script type="text/javascript" src="/libs/angular/angular.js"></script>
   <script type="text/javascript" src="/libs/modernizr/modernizr.js"></script>
   <script type="text/javascript" src="/libs/angular-resources.js"></script>
   <script type="text/javascript" src="/angularApp.js"></script>
   <script type="text/javascript" src="/resources/item.js"></script>
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   
 
 </head>
 
 <body>
+  <div topbar></div>
+  <div dashboard></div>
+  <div post-item></div>
 
   <% include partials/topbar %>
   <div class="row collapse">
@@ -32,71 +38,7 @@
     </div>
   </div>
 
-  <section class='store-select'>
-    <div class="wrapper-checkbox">
-    <h1>Select Stores</h1>
-    <div class="checkbox">
-      <div class="figure-container">
-        <div class="figure face"></div>
-      </div>
-      <div class="text">
-        <span>Etsy</span>
-      </div>
-    </div>
-    <div class="checkbox">
-      <div class="figure-container">
-        <div class="figure face"></div>
-      </div>
-      <div class="text">
-        <span>Amazon</span>
-      </div>
-    </div>
-
-    <div class="checkbox">
-      <div class="figure-container">
-        <div class="figure face"></div>  
-      </div>
-      <div class="text"> 
-        <span>Ebay</span>
-      </div>
-    </div>
-    
-    <div class="submit">
-      <div class="text">
-        <span>Add</span>
-      </div>
-    </div>
-  </div>
-</section> 
-
-<script>
-$('.checkbox').on('click', function(){
-  
-   if($(this).find('.figure-container div').hasClass('clicked'))
-     {
-       
-       $(this).find('.figure-container div').addClass('face').removeClass('entypo-check clicked').animate('slow'); 
-       
-     }else{
-     
-   $(this).find('.figure-container div').removeClass('face').addClass('entypo-check clicked').animate('slow'); 
-    }
-});
-</script> 
-
 
 </body>
 </html>
 
-
-
-  <!-- <script src="/libs/angular-route/angular-route.js"></script>
-  <script src="/services.js"></script>
-  <script src="/controllers.js"></script>
-  <script src="/filters.js"></script>
-  <script src="/directives.js"></script> -->
-
-  <!-- <script src="/modules/items/items.js"></script>
-  <script src="/modules/shops/shops.js"></script>
-  <script src="/modules/users/users.js"></script>
-  <script src="/modules/storeitem/storeitem.js"></script> -->
