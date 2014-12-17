@@ -61,6 +61,7 @@ module.exports = function(app) {
       res.json(body);
       console.log(req.session.token);
       console.log(req.session.sec);
+      //new constructor copying not creating new.
       var newuser = new User({
         credentials: {
           etsy: {
