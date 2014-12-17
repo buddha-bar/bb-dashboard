@@ -1,14 +1,20 @@
-<section class='store-select' ng-show="tab.isSet(2)">
+<section class="store-select">
     <div class="wrapper-checkbox">
     <h2>Select Stores</h2>
-    <div class="checkbox">
-      <div class="figure-container">
-        <div class="figure face"></div>
-      </div>
-      <div class="text">
-        <span>Etsy</span>
-      </div>
-    </div>
+
+    <section ng-class="{ active: post.isSet(1) }">
+      <a href ng-click="post.setPost(1)">
+        <div class="checkbox">
+          <div class="figure-container">
+            <div class="figure face"></div>
+          </div>
+          <div class="text">
+            <span>Etsy</span>
+          </div>
+        </div>
+      </a>
+    </section>
+
     <div class="checkbox">
       <div class="figure-container">
         <div class="figure face"></div>
@@ -45,6 +51,4 @@
     }
     
   });
-
-  
 </script>

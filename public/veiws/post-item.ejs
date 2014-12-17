@@ -1,4 +1,6 @@
 <section ng-controller="PostController as post">
-  <div select-menu></div>
-  <div etsy-form></div>
+  <div ng-show="tab.isSet(2)">
+    <div select-menu></div>
+    <div etsy-form></div>
+  </div>
 </section>

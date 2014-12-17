@@ -19,6 +19,18 @@
 
   });
 
+  app.controller('PostController', function(){
+    // this.post = 1;
+
+    this.setPost = function(newValue){
+      this.post = newValue;
+    };
+
+    this.isSet = function(postName){
+      return this.post === postName;
+    };
+  });
+
   app.controller('TabController', function(){
     this.tab = 1;
 
@@ -31,11 +43,13 @@
     };
   });
 
+  
+
   app.directive('topbar', function() {
     return {
       templateUrl: '/veiws/topbar.ejs'
     };
-  });
+  }); 
 
   app.directive('dashboard', function() {
     return {
@@ -43,9 +57,21 @@
     };
   });
 
+  app.directive('postItem', function() {
+    return {
+      templateUrl: '/veiws/post-item.ejs'
+    };
+  }); 
+
   app.directive('selectMenu', function() {
     return {
       templateUrl: '/veiws/select-menu.ejs'
+    };
+  });
+
+  app.directive('etsyForm', function() {
+    return {
+      templateUrl: '/veiws/etsy-form.ejs'
     };
   });
 
