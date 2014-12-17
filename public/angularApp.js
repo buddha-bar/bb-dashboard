@@ -19,6 +19,18 @@
 
   });
 
+  app.controller('PostController', function(){
+    this.post = 1;
+
+    this.setPost = function(newValue){
+      this.post = newValue;
+    };
+
+    this.isSet = function(postName){
+      return this.post === postName;
+    };
+  });
+
   app.controller('TabController', function(){
     this.tab = 1;
 
@@ -31,6 +43,8 @@
     };
   });
 
+  
+
   app.directive('topbar', function() {
     return {
       templateUrl: '/veiws/topbar.ejs'
@@ -40,6 +54,12 @@
   app.directive('dashboard', function() {
     return {
       templateUrl: '/veiws/dashboard.ejs'
+    };
+  });
+
+  app.directive('etsyForm', function() {
+    return {
+      templateUrl: '/veiws/etsy-form.ejs'
     };
   });
 

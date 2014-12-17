@@ -1,4 +1,4 @@
-<form>
+<form ng-show="post.isSet(1)">
   <h1>Etsy form</h1>
 
   <div class="select-group" id="who-made">
@@ -53,14 +53,45 @@
     </div>
   </div>
 
-  <div class="select-group  inactive " id="is-supply">
-    <h4>What is it?</h4>                
-    <select name="property[issupply]" disabled="disabled">
-      <option value="">Select a use...</option>
-      <option value="0" >A finished product</option>
-      <option value="1" >A supply or tool to make things</option>
-    </select>
+  <div class="input-group clear retail-only-input" id="item-type-container">
+    <label>Item type</label>
+    <div class="listing-type select-group">  
+      <div id="listing-type-controls">
+      <input id="listing-type-physical" type="radio" name="property[listing_type]"  checked="checked"  value="0">
+      <label for="listing-type-physical">Physical item</label>
+
+      <input id="listing-type-digital" type="radio" name="property[listing_type]"  value="1">
+      <label for="listing-type-digital">Digital file</label>
+    </div>
   </div>
+
+  <div class="input-group input-group-photos  clear">
+    <p class="last">Listings look best with photos at least 570px wide. We recommend replacing the highlighted photos below.</p>
+
+    <div id="photos">
+      <label id="photos-label" for="photos">Photos</label>
+      <div class="photo-inputs">
+        <ul class="rearrange-container error-insert-point">
+          <li class="image-box add">
+            <div>
+              <div class="upload-container">
+                <input type="file" name="image-upload" id="image-upload" class="image-upload" multiple="multiple">
+              </div>
+              <div class="add-photos-button">
+                <span class="button-add"></span>
+                <span>Add Photos</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p>Convey the shape, size, color, and texture. Try to use natural light and include a great close up.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
   
 </form>
 
