@@ -1,5 +1,5 @@
 (function(){
-  var app = angular.module('dashboard', ['ngResource']);
+  var app = angular.module('dashboard', ['ngResource', 'ui.router']);
   
   app.controller('ItemController', function($scope, $http, Item){
     $scope.items = Item.query();
@@ -25,6 +25,37 @@
 
   });
 
+  app.config(function($stateProvider, $urlRouterProvider) {
+    //
+    // For any unmatched url, redirect to /state1
+    $urlRouterProvider.otherwise("/");
+    //
+    // Now set up the states
+    $stateProvider
+      .state('dashboard', {
+        url: "/",
+        templateUrl: "views/dashboard.ejs"
+      })
+      // .state('state1.list', {
+      //   url: "/list",
+      //   templateUrl: "partials/state1.list.html",
+      //   controller: function($scope) {
+      //     $scope.items = ["A", "List", "Of", "Items"];
+      //   }
+      // })
+      .state('post-item', {
+        url: "/post-item",
+        templateUrl: "/views/post-item.ejs"
+      })
+      // .state('state2.list', {
+      //   url: "/list",
+      //   templateUrl: "partials/state2.list.html",
+      //   controller: function($scope) {
+      //     $scope.things = ["A", "Set", "Of", "Things"];
+      //   }
+      // });
+  });
+
   app.controller('PostController', function(){
     // this.post = 1;
 
@@ -36,20 +67,6 @@
       return this.post === postName;
     };
   });
-
-  app.controller('TabController', function(){
-    this.tab = 1;
-
-    this.setTab = function(newValue){
-      this.tab = newValue;
-    };
-
-    this.isSet = function(tabName){
-      return this.tab === tabName;
-    };
-  });
-
-  
 
   app.directive('topbar', function() {
     return {

@@ -3,22 +3,22 @@
     <li class="name">
       <h1><img src="/images/bb-logo.png" />Buddha Bar</h1>
     </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    <!-- <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> -->
   </ul>
 
   <section class="top-bar-section">
     <ul class="right">
-      <li ng-class="{ active: tab.isSet(1) }">
-        <a href ng-click="tab.setTab(1)">Dashboard</a>
+      <li>
+        <a ui-sref="dashboard">Dashboard</a>
       </li>
-      <li class="active" ng-class="{ active: tab.isSet(2) }">
-        <a href ng-click="tab.setTab(2)">Post New Item!</a>
+      <li>
+        <a ui-sref="post-item">Post New Item!</a>
       </li>
       <li class="has-dropdown">
-        <a href="#">Username</a>
+        <a href="">Username</a>
         <ul class="dropdown">
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Logout</a></li>
+          <li><a href="">Settings</a></li>
+          <li><a href="">Logout</a></li>
         </ul>
       </li>
     </ul>
