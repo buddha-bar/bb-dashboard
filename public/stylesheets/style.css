@@ -28,13 +28,22 @@ body {
   font-size: 2em;
 }
 
-.top-bar-section li.active:not(.has-form) a:not(.button) {
+.top-bar-section ul li.pink:not(.has-form) a:not(.button) {
+  background-color: #fa3c45;
+  color: #fff;
+}
+
+.top-bar-section ul li.pink:not(.has-form) a:not(.button):hover {
+  background-color: #ed2533;
+} 
+
+/*.top-bar-section li.active:not(.has-form) a:not(.button) {
   background-color: #fa3c45;
 }
 
 .top-bar-section li.active:not(.has-form) a:not(.button):hover {
   background-color: #ed2533;
-}
+}*/
 
 .top-bar-section ul li > a {
   font-size: 1em;

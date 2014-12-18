@@ -23,7 +23,15 @@
         }); 
     }
 
+    // $scope.updateItems = function($scope) {
+    //   $scope.items = Item.query();
+    // }
+
   });
+
+  // app.controller('utilityController', function($scope)){
+    
+  // }
 
   app.config(function($stateProvider, $urlRouterProvider) {
     //
@@ -74,17 +82,17 @@
     };
   }); 
 
-  app.directive('dashboard', function() {
-    return {
-      templateUrl: '/views/dashboard.ejs'
-    };
-  });
+  // app.directive('dashboard', function() {
+  //   return {
+  //     templateUrl: '/views/dashboard.ejs'
+  //   };
+  // });
 
-  app.directive('postItem', function() {
-    return {
-      templateUrl: '/views/post-item.ejs'
-    };
-  }); 
+  // app.directive('postItem', function() {
+  //   return {
+  //     templateUrl: '/views/post-item.ejs'
+  //   };
+  // }); 
 
   app.directive('selectMenu', function() {
     return {
