@@ -171,7 +171,29 @@ module.exports = function(app) {
     console.log(req.params);
     console.log (req.params.itemId);
 
-    res.json({params: req.params});
+    var Item = mongoose.model('Item');
+    Item.findOne({_id: req.params.itemId}, function(err, item){
+
+      console.log(item);
+
+      // update item.stock to 300
+      // save the item
+      // respond with the item
+
+      item.stock = req.body.stock;
+
+      item.save(function (err) {
+        console.log('it worked');
+        
+        res.json(item);
+      })
+
+    });
+
+    //item.find _id is passed
+    //update and save
+
+    //res.json({params: req.params});
   });
 
 };
