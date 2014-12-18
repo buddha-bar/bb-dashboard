@@ -1,9 +1,29 @@
 (function(){
   var app = angular.module('dashboard', ['ngResource']);
   
-  app.controller('ItemController', function($scope, Item){
+  app.controller('ItemController', function($scope, $http, Item){
 
     $scope.items = Item.query();
+
+    
+
+    $scope.updateItemCount = function(itemId, newCount) {
+
+      $http.post('/api/etsy/items/'+ itemId, { stock: newCount }).   
+        success(function(data, status, headers, config) {
+          alert('did it')
+          console.log(data)
+        }).
+        error(function(data, status, headers, config) {
+          alert('hfgdjsg')
+        }); 
+
+
+      //console.log($scope.newStockCount);
+      //console.log(arguments);
+
+      //console.log('Updating count for item '+item.name+ ' to '+newCount);
+    }
 
 
     // for reference 

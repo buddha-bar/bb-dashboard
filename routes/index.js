@@ -119,6 +119,14 @@ module.exports = function(app) {
     //     console.dir("working");
     //     }
     //   });
+  
+  app.post('/api/:storeType/items/:itemId', function(req, res, next){
+    console.log(req.params);
+    console.log (req.params.itemId);
+
+    res.json({params: req.params});
+  });
+
 
   //regan estract data from db (temp)
 
@@ -146,12 +154,18 @@ module.exports = function(app) {
 
   // Should get all user items
   app.get('/api/items', function(req, res, next) {
-    console.log("asdf why am I getting called?");
     var User = mongoose.model('User');
     User.find({username:'BillyBob'},function(err, user){
       if(err){ return next(err); }
+      console.dir(user);
 
       var user = user[0];
+
+      // var items = user.items;
+      // items.forEach(function(item) {
+      //   item._id = mongoose.Types.ObjectId();
+      // });
+
       res.json(user.items);
     });
   });

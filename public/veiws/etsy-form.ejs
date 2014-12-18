@@ -1,5 +1,5 @@
 <form ng-show="post.isSet(1)" class="postform">
-  <h1>Etsy form</h1>
+  <h1>Etsy Form</h1>
 
   <div class="select-group" id="who-made">
     <h4>Who made it?</h4>           
@@ -91,11 +91,50 @@
 
   <div class="title-row">
     <label for="title-parent">Item Title</label>
-    <p class="inline-message ">Descriptive titles are best. Try to describe your item the way a buyer would.
-    </p>
+    <p class="inline-message ">Descriptive titles are best. Try to describe your item the way a buyer would.</p>
+    <input type="test">
   </div>
 
+  <div class="title-row">
+    <label for="description-parent">Description</label>
+    <p class="inline-message">Try to answer the questions buyers will have. Tell the item's story and explain why it's special.</p>
+        
+    <label for="item-description-en-US"></label>
+    <textarea name="listing[description]"class="text description  primary"id="item-description-en-US"data-language="en-US"></textarea>
+  </div>
 
+  <div data-variation="property[recipient]" class="input-group clear" id="recipient">
+    <div class="msg msg-alt msg-inline" data-notice-key="ors-tips-7-26-11">
+      <p><strong>We're going to use these new attributes soon to help buyers find your item.</strong></p>
+      <p>If you currently use tags for recipient, occasion, or style you should continue to add those tags.</p>
+      <span class="arrow arrow-b"></span>
+    </div>
+        
+    <label for="recipient">Recipient</label>
+    <div class="select-group">
+      <h4>Who is it for? <span class="optional">optional</span></h4>
+      <select name="property[recipient]">
+        <option value="">Select a recipient...</option>
+        <option value="266817085" >Babies</option>
+        <option value="266817081" >Baby Boys</option>
+        <option value="266817083" >Baby Girls</option>
+        <option value="266817087" >Birds</option>
+        <option value="266817073" >Boys</option>
+        <option value="301958802" >Cats</option>
+        <option value="266817079" >Children</option>
+        <option value="301959052" >Dogs</option>
+        <option value="266817077" >Girls</option>
+        <option value="266817059" >Men</option>
+        <option value="301959242" >Pets</option>
+        <option value="266817067" >Teen Boys</option>
+        <option value="266817069" >Teen Girls</option>
+        <option value="266817071" >Teens</option>
+        <option value="266817065" >Unisex Adults</option>
+        <option value="266817061" >Women</option>
+      </select>
+      <a class="overlay-trigger" href="" rel="#recipient-help">What if my item is for everyone?</a>
+    </div>
+  </div>
 
 
   
