@@ -120,12 +120,7 @@ module.exports = function(app) {
     //     }
     //   });
   
-  app.post('/api/:storeType/items/:itemId', function(req, res, next){
-    console.log(req.params);
-    console.log (req.params.itemId);
 
-    res.json({params: req.params});
-  });
 
 
   //regan estract data from db (temp)
@@ -153,21 +148,33 @@ module.exports = function(app) {
   });
 
   // Should get all user items
-  app.get('/api/items', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find({username:'BillyBob'},function(err, user){
-      if(err){ return next(err); }
-      console.dir(user);
 
-      var user = user[0];
+  app.get('/api/items', function(req, res, next) {
+    var Item = mongoose.model('Item');
+    Item.find(function(err, items){
+      if(err){ return next(err); }
+
+      // var user = user[0];
 
       // var items = user.items;
       // items.forEach(function(item) {
       //   item._id = mongoose.Types.ObjectId();
       // });
 
-      res.json(user.items);
+      res.json(items);
     });
   });
+
+
+// should recive and update item stock
+  app.post('/api/:storeType/items/:itemId', function(req, res, next){
+    console.log(req.params);
+    console.log (req.params.itemId);
+
+    res.json({params: req.params});
+  });
+
 };
+
+
 

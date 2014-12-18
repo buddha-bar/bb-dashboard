@@ -8,7 +8,7 @@
     
 
     $scope.updateItemCount = function(itemId, newCount) {
-
+      // change item, update stock and pass id
       $http.post('/api/etsy/items/'+ itemId, { stock: newCount }).   
         success(function(data, status, headers, config) {
           alert('did it')
