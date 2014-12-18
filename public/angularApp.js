@@ -11,14 +11,12 @@
 
       // $scope.item.stock = newCount
       $http.post('/api/etsy/items/'+ item._id, { stock: newCount }).   
+
         success(function(data, status, headers, config) {
-          alert('did it')
-          console.log(data)
+          item.stock = newCount;
         }).
         error(function(data, status, headers, config) {
-          alert('hfgdjsg')
         }); 
-
 
       //console.log($scope.newStockCount);
       //console.log(arguments);
