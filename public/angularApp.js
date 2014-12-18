@@ -70,55 +70,55 @@
 
   app.directive('topbar', function() {
     return {
-      templateUrl: '/veiws/topbar.ejs'
+      templateUrl: '/views/topbar.ejs'
     };
   }); 
 
   app.directive('dashboard', function() {
     return {
-      templateUrl: '/veiws/dashboard.ejs'
+      templateUrl: '/views/dashboard.ejs'
     };
   });
 
   app.directive('postItem', function() {
     return {
-      templateUrl: '/veiws/post-item.ejs'
+      templateUrl: '/views/post-item.ejs'
     };
   }); 
 
   app.directive('selectMenu', function() {
     return {
-      templateUrl: '/veiws/select-menu.ejs'
+      templateUrl: '/views/select-menu.ejs'
     };
   });
 
   app.directive('etsyForm', function() {
     return {
-      templateUrl: '/veiws/etsy-form.ejs'
+      templateUrl: '/views/etsy-form.ejs'
     };
   });
 
   app.directive('etsyContainer', function() {
     return {
-      templateUrl: '/veiws/etsy-container.ejs'
+      templateUrl: '/views/etsy-container.ejs'
     };
   });
 
   app.directive('amazonContainer', function() {
     return {
-      templateUrl: '/veiws/amazon-container.ejs'
+      templateUrl: '/views/amazon-container.ejs'
     };
   });
 
   app.directive('ebayContainer', function() {
     return {
-      templateUrl: '/veiws/ebay-container.ejs'
+      templateUrl: '/views/ebay-container.ejs'
     };
   });
 
   app.directive('item', function() {
     return {
-      templateUrl: '/veiws/item.ejs'
+      templateUrl: '/views/item.ejs'
     };
   });
 
