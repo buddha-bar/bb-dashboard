@@ -54,7 +54,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/etsy/find', function(req, res) {
-    bEtsy.getUsersEtsyInfo(req, res, function(err, body){
+    bEtsy.getUsersEtsyInfo(username, function(err, body){
       if (err) {
         console.log(err);
       }
@@ -84,7 +84,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
-    bEtsy.getItemCount(req, res, function(err, body){
+    bEtsy.getItemCount(req.params.itemID, function(err, body){
       if(err){
         console.log(err);
       }
@@ -97,6 +97,14 @@ module.exports = function(app) {
     console.log("We're trying to update item #"+req.params.itemId);
     bEtsy.updateItemCount(req.params.itemId, req.params.stockCount, function(err, body){
       res.send(body.results[0]);
+      Item.findOne({_id: req.params.itemId}, function(err, user){
+        if (err) { return next(err); }
+        Item.stock = req.params.stockCount;
+        Item.save(function(err) {
+          if (err) { return next(err); }
+        });
+      });
+
     });
     res.json(req.body);
 
@@ -108,14 +116,6 @@ module.exports = function(app) {
     // #todo - make api calls as needed
     // response with json representing item
   });
-
-
-  // app.get('/api/etsy/updateItemCount', function(req, res){
-  //   bEtsy.updateItemCount(req, res, function(err, body){
-  //     res.send(body.results[0]);
-  //     res.json(body);
-  //   });
-  // });
 
   app.get('/api/etsy/getListings',function(req, res){
     //returns a list of active listings from the users shop.
