@@ -13,7 +13,12 @@
   <script type="text/javascript" src="/libs/angular/angular.js"></script>
   <script type="text/javascript" src="/libs/modernizr/modernizr.js"></script>
   <script type="text/javascript" src="/libs/angular-resources.js"></script>
+  <script type="text/javascript" src="/libs/angular-ui-router.js"></script>
+
+  <!-- remove -->
   <script type="text/javascript" src="/libs/angular-route/angular-route.js"></script>
+
+
   <script type="text/javascript" src="/angularApp.js"></script>
   <script type="text/javascript" src="/resources/item.js"></script>
    
@@ -21,11 +26,12 @@
 </head>
 
 <body>
-  <section ng-controller="TabController as tab">
+  <!-- <section ng-controller="TabController as tab"> -->
     <div topbar></div>
-    <div dashboard></div>
-    <div post-item></div>
-  </selection>
+    <div ui-view></div>
+    <!-- <div dashboard></div>
+    <div post-item></div> -->
+  <!-- </selection> -->
 
 </body>
 </html>

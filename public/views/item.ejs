@@ -1,9 +1,16 @@
 <div class="item clearfix" ng-controller="ItemController">
+
   <div ng-repeat="item in items"> 
     <img ng-src="http:{{item.image}}" />
-    <!-- <p>"http:{{item.image}}"</p> -->
+    
     <h3>{{item.name}}</h3>
     <p> Stock level: {{item.stock}}</p>
+
+    <form ng-submit="updateItemCount(item, newStockCount)">
+      <input type="number" ng-model="newStockCount"> 
+      <input type="submit">
+    </form>
+
     <div class="clear"></div>
   </div>
 </div>

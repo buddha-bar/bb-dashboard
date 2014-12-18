@@ -137,6 +137,9 @@ module.exports = function(app) {
     //     console.dir("working");
     //     }
     //   });
+  
+
+
 
   //regan estract data from db (temp)
 
@@ -163,15 +166,55 @@ module.exports = function(app) {
   });
 
   // Should get all user items
+
   app.get('/api/items', function(req, res, next) {
-    console.log("asdf why am I getting called?");
-    var User = mongoose.model('User');
-    User.find({username:'BillyBob'},function(err, user){
+    var Item = mongoose.model('Item');
+    Item.find(function(err, items){
       if(err){ return next(err); }
 
-      var user = user[0];
-      res.json(user.items);
+      // var user = user[0];
+
+      // var items = user.items;
+      // items.forEach(function(item) {
+      //   item._id = mongoose.Types.ObjectId();
+      // });
+
+      res.json(items);
     });
   });
+
+
+// should recive and update item stock
+  app.post('/api/:storeType/items/:itemId', function(req, res, next){
+    console.log(req.params);
+    console.log (req.params.itemId);
+
+    var Item = mongoose.model('Item');
+    Item.findOne({_id: req.params.itemId}, function(err, item){
+
+      console.log(item);
+
+      // update item.stock to 300
+      // save the item
+      // respond with the item
+
+      item.stock = req.body.stock;
+
+      item.save(function (err) {
+        console.log('it worked');
+        
+        res.json(item);
+      })
+
+    });
+
+    //item.find _id is passed
+    //update and save
+
+    //res.json({params: req.params});
+  });
+
 };
+
+
 
