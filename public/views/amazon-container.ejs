@@ -1,12 +1,29 @@
-<div class='store-container'>
+<div class='store-container' ng-controller="ItemController">
 
   <span class="store-utility-icons">
-    <i class="fa fa-refresh right"></i>
-    <i class="fa fa-times-circle-o right"></i>
+    <i ng-click="updateItems(items)" class="fa fa-refresh right"></i>
+    <!-- <i class="fa fa-times-circle-o right"></i> -->
   </span>
   
   <h1 class="left">Amazon</h1>
   <div class="clear"></div>
-  <div item></div>
+  <!-- <div item></div> -->
+
+  <div class="item clearfix" >
+
+  <div ng-repeat="item in items"> 
+    <img ng-src="http:{{item.image}}" />
+    
+    <h3>{{item.name}}</h3>
+    <p> Stock level: {{item.stock}}</p>
+
+    <form ng-submit="updateItemCount(item, newStockCount)">
+      <input type="number" ng-model="newStockCount"> 
+      <input type="submit">
+    </form>
+
+    <div class="clear"></div>
+  </div>
+ </div>
 
 </div>

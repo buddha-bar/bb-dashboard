@@ -10,22 +10,26 @@
 
           //find items with same id scope and update
           //transclusion
+
+          item.stock = newCount;
           
-          for(var i = 0; i < $scope.items.length; i++){
-            var matchItem = $scope.items[i];
-            if(matchItem._id == item._id){
-              matchItem.stock = newCount;
-            }
-          };
+          // for(var i = 0; i < $scope.items.length; i++){
+          //   var matchItem = $scope.items[i];
+          //   if(matchItem._id == item._id){
+          //     matchItem.stock = newCount;
+          //   }
+          // };
 
         }).
         error(function(data, status, headers, config) {
         }); 
     }
 
-    // $scope.updateItems = function($scope) {
-    //   $scope.items = Item.query();
-    // }
+    $scope.updateItems = function(items) {
+      console.log('items:', items);
+      $scope.items = Item.query();
+      console.log('scope items: ', $scope.items);
+    }
 
   });
 
