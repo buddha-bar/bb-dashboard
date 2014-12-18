@@ -92,12 +92,30 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/api/etsy/updateItemCount', function(req, res){
-    bEtsy.updateItemCount(req, res, function(err, body){
+
+  app.post('/api/items/:itemId', function(req, res){
+    console.log("We're trying to update item #"+req.params.itemId);
+    bEtsy.updateItemCount(req.params.itemId, req.params.stockCount, function(err, body){
       res.send(body.results[0]);
-      res.json(body);
     });
+    res.json(req.body);
+
+    //Item.where({id: req.params.itemId})
+
+
+    // use mongo to update database
+
+    // #todo - make api calls as needed
+    // response with json representing item
   });
+
+
+  // app.get('/api/etsy/updateItemCount', function(req, res){
+  //   bEtsy.updateItemCount(req, res, function(err, body){
+  //     res.send(body.results[0]);
+  //     res.json(body);
+  //   });
+  // });
 
   app.get('/api/etsy/getListings',function(req, res){
     //returns a list of active listings from the users shop.

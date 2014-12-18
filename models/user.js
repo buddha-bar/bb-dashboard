@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var User = new Schema({
     username: String,
     password: String,
-    items: [{ type : Schema.ObjectId, ref : 'Item' }],
+    items: [{ type: Schema.Types.ObjectId, ref: 'Item'}],
     credentials: {
       amazon: Object,
       etsy: Object,
