@@ -5,7 +5,7 @@ var url = require('url');
 var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 var bEtsy = require('../lib/buddhaetsy');
-var etsy = require('../lib/etsy');
+var etsy = require('../lib/buddhaetsy/etsy');
 
 module.exports = function(app) {
 
