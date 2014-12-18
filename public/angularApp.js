@@ -7,24 +7,24 @@
 
     
 
-    $scope.updateItemCount = function(itemId, newCount) {
+    $scope.updateItemCount = function(item, itemId, newCount) {
       // change item, update stock and pass id
+
+      // $scope.item.stock = newCount
       $http.post('/api/etsy/items/'+ itemId, { stock: newCount }).   
         success(function(data, status, headers, config) {
-          alert('did it')
-          console.log(data)
+          //console.log(item);
+          item.stock = newCount;
+          //console.log(item);
         }).
         error(function(data, status, headers, config) {
-          alert('hfgdjsg')
         }); 
-
 
       //console.log($scope.newStockCount);
       //console.log(arguments);
 
       //console.log('Updating count for item '+item.name+ ' to '+newCount);
     }
-
 
     // for reference 
     // Ruby

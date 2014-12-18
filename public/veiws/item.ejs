@@ -4,7 +4,7 @@
     <img ng-src="http:{{item.image}}" />
     <h3>{{item.name}}</h3>
     <p> Stock level: {{item.stock}}</p>
-    <form ng-submit="updateItemCount(item._id, newStockCount)">
+    <form ng-submit="updateItemCount(item, item._id, newStockCount)">
       <!-- <input type="hidden" value="{{item._id}}"> -->
       <input type="number" ng-model="newStockCount"> 
       <input type="submit">
