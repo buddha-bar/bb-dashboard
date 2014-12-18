@@ -5,7 +5,7 @@ var Item = mongoose.Schema({
     name: String,
     stock: Number,
     image: String,
-    owner: {type: Number, ref: 'User'},
+    owner: {type: Schema.Types.ObjectId, ref: 'User'},
     etsy: {
       listingId: String,
       stock: Number,
