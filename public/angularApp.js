@@ -2,26 +2,25 @@
   var app = angular.module('dashboard', ['ngResource']);
   
   app.controller('ItemController', function($scope, $http, Item){
-
     $scope.items = Item.query();
-
-
     $scope.updateItemCount = function(item, newCount) {
       // change item, update stock and pass id
-
-      // $scope.item.stock = newCount
       $http.post('/api/etsy/items/'+ item._id, { stock: newCount }).   
-
         success(function(data, status, headers, config) {
-          item.stock = newCount;
+
+          //find items with same id scope and update
+          //transclusion
+          
+          for(var i = 0; i < $scope.items.length; i++){
+            var matchItem = $scope.items[i];
+            if(matchItem._id == item._id){
+              matchItem.stock = newCount;
+            }
+          };
+
         }).
         error(function(data, status, headers, config) {
         }); 
-
-      //console.log($scope.newStockCount);
-      //console.log(arguments);
-
-      //console.log('Updating count for item '+item.name+ ' to '+newCount);
     }
 
   });
