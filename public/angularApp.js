@@ -8,10 +8,10 @@
     $scope.ebayItems = Item.query();
     $scope.updateItemCount = function(item, newCount) {
 
-      item.stock = newCount;
+      // item.stock = newCount;
       
       for(var i = 0; i < $scope.inventory.length; i++){
-        
+
         if($scope.ebayItems[i]._id == item._id){
           $scope.ebayItems[i].stock = newCount;
         }
@@ -68,12 +68,16 @@
   app.config(function($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/404");
     //
     // Now set up the states
     $stateProvider
+      .state('login', {
+        url: "",
+        templateUrl: "views/login.ejs"
+      })
       .state('dashboard', {
-        url: "/",
+        url: "/dashboard",
         templateUrl: "views/dashboard.ejs"
       })
       // .state('state1.list', {
@@ -107,6 +111,10 @@
       return this.post === postName;
     };
   });
+
+  app.controller('indexController', function(){
+
+  })
 
   app.directive('topbar', function() {
     return {
@@ -165,6 +173,12 @@
   app.directive('item', function() {
     return {
       templateUrl: '/views/item.ejs'
+    };
+  });
+
+  app.directive('autho-modal', function() {
+    return {
+      templateUrl: '/views/autho-modal.ejs'
     };
   });
 
