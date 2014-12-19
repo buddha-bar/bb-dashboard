@@ -24,7 +24,27 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/test', function(req, res) {
+  // 
+  app.get('/signup', function(req, res){
+  //whatever regan needs to signup page?
+  });
+
+  //get info from username
+  app.post('/signup', function(req, res){
+    var newuser = User.new({
+      username: req.username,
+      password: req.password
+    })
+    newuser.save(function (err) {
+      if(!err){
+        console.dir(newuser);
+      }
+      else {
+        console.log(err);
+      }
+    });
+  });
+  app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
       console.log(response);
       if (err) {
@@ -37,7 +57,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/authorise', function(req, res) {
+  app.get('/etsy/authorise', function(req, res) {
     // parse the query string for OAuth verifier
     query = url.parse(req.url, true).query;
     verifier = query.oauth_verifier;
@@ -54,7 +74,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/etsy/find', function(req, res) {
-    bEtsy.getUsersEtsyInfo(username, function(err, body){
+    bEtsy.getUsersEtsyInfo(req, res, function(err, body){
       if (err) {
         console.log(err);
       }
@@ -62,24 +82,25 @@ module.exports = function(app) {
       console.log(req.session.token);
       console.log(req.session.sec);
       //new constructor copying not creating new.
-      var newuser = new User({
-        credentials: {
-          etsy: {
-            userid: body.user_id,
-            usertoken: req.session.token,
-            usersecret: req.session.secret
-          }
-        }
-      })
+      // User.findOne({username: currentUser},function(err, something){
 
-      newuser.save(function (err) {
-        if(!err){
-          console.dir(newuser);
-        }
-        else {
-          console.log(err);
-        }
-      });
+      //   User.credentials.etsy {
+      //     etsy: {
+      //       userid: body.user_id,
+      //       usertoken: req.session.token,
+      //       usersecret: req.session.secret
+      //     }
+      //   }
+      // });
+
+      // newuser.save(function (err) {
+      //   if(!err){
+      //     console.dir(newuser);
+      //   }
+      //   else {
+      //     console.log(err);
+      //   }
+      // });
     });
   });
 

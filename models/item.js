@@ -9,14 +9,17 @@ var Item = mongoose.Schema({
     etsy: {
       listingId: String,
       stock: Number,
+      etsystore: String,
       store: String
     },
     amazon: {
       listingId: String,
       stock: Number,
+      amazonstore: String,
       store: String
     }
 });
 
 module.exports = mongoose.model('Item', Item)
 
+// populate etsy column with where store = etsy 
