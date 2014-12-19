@@ -1,14 +1,12 @@
-<div class="wrapper">
+<div class="wrapper" ng-controller="LoginController">
   <div class="login-wrapper">
     <div id="login">
       <h1> Login </h1>
 
-      <form>
-        <span class="fontawesome-envelope"></span>
-        <input type="username" name="username" placeholder="Username" >
-        <span class="fontawesome-lock"></span>
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Submit">
+      <form ng-submit="login(credentials)">
+        <input type="text" placeholder="Username" ng-model="credentials.username">
+        <input type="password" placeholder="Password" ng-model="credentials.password">
+        <input type="submit">
       </form>
 
     </div>

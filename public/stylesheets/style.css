@@ -303,3 +303,35 @@ h2 {
     filter: blur(5px);
 
 }
+
+/* ========== Login ==============*/
+
+.wrapper {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#login form input {
+  height: 50px;
+  font-size: 1em;
+  width: 230px;
+  padding-left: 15px;
+}
+
+#login form input[type="submit"] {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #eee;
+  font-weight: bold;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+  width: 230px;
+}
+
+#login form input[type="submit"]:hover {
+  /*background-color: #B44E4A;*/
+}
+
