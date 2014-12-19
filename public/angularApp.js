@@ -6,6 +6,14 @@
     $scope.amazonItems = Item.query();
     $scope.etsyItems = Item.query();
     $scope.ebayItems = Item.query();
+
+    $scope.updateItems = function(items) {
+      $scope.inventory = Item.query();
+      $scope.amazonItems = Item.query();
+      $scope.etsyItems = Item.query();
+      $scope.ebayItems = Item.query();
+    }
+
     $scope.updateItemCount = function(item, newCount) {
 
       // item.stock = newCount;
@@ -32,32 +40,8 @@
           error(function(data, status, headers, config) {
         }); 
 
-      /*
-      // change item, update stock and pass id
-      $http.post('/api/amazon/items/'+ item._id, { stock: newCount }).   
-        success(function(data, status, headers, config) {
-          //find items with same id scope and update
-          //transclusion
-        }).
-          error(function(data, status, headers, config) {
-        }); 
-
-      // change item, update stock and pass id
-      $http.post('/api/ebay/items/'+ item._id, { stock: newCount }).   
-        success(function(data, status, headers, config) {
-          //find items with same id scope and update
-          //transclusion
-        }).
-          error(function(data, status, headers, config) {
-        }); 
-      */
     }
 
-    $scope.updateItems = function(items) {
-      console.log('items:', items);
-      $scope.items = Item.query();
-      console.log('scope items: ', $scope.items);
-    }
 
   });
 
