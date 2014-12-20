@@ -212,6 +212,7 @@ module.exports = function(app) {
       console.log(currentUser);
       if(err){ return next(err); }
 
+      res.json(user);
     });
 
   });

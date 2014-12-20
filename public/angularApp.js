@@ -46,6 +46,8 @@
     $scope.updateItemCount = function(item, newCount) {
       for(var i = 0; i < $scope.inventory.length; i++){
 
+        item.stock = newCount;
+
         if($scope.ebayItems[i]._id == item._id){
           $scope.ebayItems[i].stock = newCount;
         }
@@ -76,8 +78,10 @@
 
       $http.post('/api/login', {user: credentials.username, password: credentials.password }).   
           success(function(data, status, headers, config) {
+            console.log('working');
           }).
             error(function(data, status, headers, config) {
+              console.log('did not work');
           }); 
     }
 
