@@ -8,7 +8,13 @@ var bEtsy = require('../lib/buddhaetsy');
 var etsy = require('../lib/buddhaetsy/etsy');
 
 module.exports = function(app) {
-
+  // function requireLogin (req, res, next) {
+  //   if (!req.user) {
+  //     res.redirect('/login');
+  //   } else {
+  //     next();
+  //   }
+  // };
   var User = mongoose.model('User');
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
@@ -25,15 +31,21 @@ module.exports = function(app) {
   });
 
   // 
+  app.get('/', function(req, res){
+  //whatever regan needs to signup page?
+  });
+  app.post('/login', function(req, res){
+
+  });
+
   app.get('/signup', function(req, res){
   //whatever regan needs to signup page?
   });
-
   //get info from username
   app.post('/signup', function(req, res){
     var newuser = User.new({
-      username: req.username,
-      password: req.password
+      username: req.params.username,
+      password: req.params.password
     })
     newuser.save(function (err) {
       if(!err){
