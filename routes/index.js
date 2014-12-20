@@ -204,11 +204,14 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/login/:username', function(req, res){
+  app.post('/api/login', function(req, res, next){
 
     var User = mongoose.model('User');
-    var currentUser = User.findOne({ username: req.params.username}, function(req, res){
-      console.log(req.params);
+    var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
+      // console.log(req.params);
+      console.log(currentUser);
+      if(err){ return next(err); }
+
     });
 
   });

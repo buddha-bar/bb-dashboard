@@ -74,7 +74,7 @@
    
     $scope.login = function(credentials) {
 
-      $http.post('/api/login/', {user: credentials.username, password: credentials.password }).   
+      $http.post('/api/login', {user: credentials.username, password: credentials.password }).   
           success(function(data, status, headers, config) {
           }).
             error(function(data, status, headers, config) {
@@ -83,7 +83,7 @@
 
     $scope.logout = function(credentials) {
 
-      $http.post('/api/logout/', {user: credentials.username }).   
+      $http.post('/api/logout', {user: credentials.username }).   
           success(function(data, status, headers, config) {
           }).
             error(function(data, status, headers, config) {
@@ -95,8 +95,8 @@
   app.controller('ApplicationController', function ($scope) {
       $scope.currentUser = null;
      
-      $scope.setCurrentUser = function(user) {
-        $scope.currentUser = user;
+      $scope.setCurrentUser = function(username) {
+        $scope.currentUser = username;
       };
   });
 
