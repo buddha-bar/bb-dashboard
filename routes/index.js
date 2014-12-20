@@ -31,6 +31,7 @@ module.exports = function(app) {
   });
 
   // 
+
   app.get('/', function(req, res){
   //whatever regan needs to signup page?
   });
@@ -56,6 +57,7 @@ module.exports = function(app) {
       }
     });
   });
+
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
       console.log(response);
@@ -216,16 +218,27 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/login', function(req, res, next){
+
+    var User = mongoose.model('User');
+    var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
+      // console.log(req.params);
+      console.log(currentUser);
+      if(err){ return next(err); }
+
+    });
+
+  });
 
 // should recive and update item stock
   app.post('/api/:storeType/items/:itemId', function(req, res, next){
-    console.log(req.params);
-    console.log (req.params.itemId);
+    // console.log(req.params);
+    // console.log (req.params.itemId);
 
     var Item = mongoose.model('Item');
     Item.findOne({_id: req.params.itemId}, function(err, item){
 
-      console.log(item);
+      // console.log(item);
 
       // update item.stock to 300
       // save the item
@@ -234,7 +247,7 @@ module.exports = function(app) {
       item.stock = req.body.stock;
 
       item.save(function (err) {
-        console.log('it worked');
+        // console.log('it worked');
         
         res.json(item);
       })

@@ -15,7 +15,7 @@
         <a ui-sref="post-item">Post New Item!</a>
       </li>
       <li class="has-dropdown">
-        <a href="">Username</a>
+        <a href="">Username<span ng-if="currentUser">{{ currentUser.name }}</span></a>
         <ul class="dropdown">
           <li><a href="">Settings</a></li>
           <li><a href="">Logout</a></li>
