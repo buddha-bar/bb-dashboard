@@ -1,5 +1,5 @@
 (function(){
-  var app = angular.module('dashboard', ['ngResource', 'ui.router']);
+  var app = angular.module('dashboard', ['ngResource', 'ui.router', 'ngRoute']);
 
   app.config(function($stateProvider, $urlRouterProvider) {
     //
@@ -136,6 +136,15 @@ app.directive('modalDialog', function() {
     template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
   };
 });
+
+
+  app.controller('AuthoCtrl', function($scope, $window, $routeParams, $location) {
+    $scope.name = 'Etsy';
+    $scope.goEtsy = function() {
+      $window.location.href = 'http://localhost:3000/etsy';
+    }
+  });
+
 
 //===== MODAL END =========
 

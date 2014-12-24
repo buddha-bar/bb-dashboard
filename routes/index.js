@@ -13,17 +13,6 @@ module.exports = function(app) {
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
 
-  // Should get all users
-  app.get('/users', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find(function(err, users){
-      if(err){ return next(err); }
-
-      res.json(users);
-      console.log(users);
-    });
-  });
-
   // 
   // app.get('/signup', function(req, res){
   // //whatever regan needs to signup page?
@@ -248,6 +237,7 @@ module.exports = function(app) {
   });
 
 };
+
 
 
 
