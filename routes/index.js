@@ -67,7 +67,7 @@ module.exports = function(app) {
       if (err) {
         console.log(err);
       }
-      res.json(body);
+      // res.json(body);
       console.log(req.session.token);
       console.log(req.session.sec);
       //new constructor copying not creating new.
@@ -91,6 +91,8 @@ module.exports = function(app) {
       //   }
       // });
     });
+    // redirect back to dashbaord; are we still getting information?
+    res.redirect('/#/dashboard');
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){

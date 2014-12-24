@@ -139,9 +139,15 @@ app.directive('modalDialog', function() {
 
 
   app.controller('AuthoCtrl', function($scope, $window, $routeParams, $location) {
-    $scope.name = 'Etsy';
+    $scope.name = 'authorize';
     $scope.goEtsy = function() {
       $window.location.href = 'http://localhost:3000/etsy';
+    }
+    $scope.goAmazon = function() {
+      $window.location.href = 'http://localhost:3000/amazon';
+    }
+    $scope.goEbay = function() {
+      $window.location.href = 'http://localhost:3000/ebay';
     }
   });
 
