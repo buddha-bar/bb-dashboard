@@ -12,17 +12,17 @@
         url: "",
         templateUrl: "views/login.ejs"
       })
+      // .state('login.etsy', {
+      //   url: "/etsy",
+        // templateUrl: "partials/state1.list.html",
+        // controller: function($scope) {
+        //   $scope.items = ["A", "List", "Of", "Items"];
+        // }
+      // })
       .state('dashboard', {
         url: "/dashboard",
         templateUrl: "views/dashboard.ejs"
       })
-      // .state('state1.list', {
-      //   url: "/list",
-      //   templateUrl: "partials/state1.list.html",
-      //   controller: function($scope) {
-      //     $scope.items = ["A", "List", "Of", "Items"];
-      //   }
-      // })
       .state('post-item', {
         url: "/post-item",
         templateUrl: "/views/post-item.ejs"
@@ -71,7 +71,7 @@
 
 // ======== LOGIN =================
 
-  app.controller('LoginController', function($scope, $http){
+  app.controller('LoginController', function($scope, $location, $http){
 
    
     $scope.login = function(credentials) {
@@ -79,6 +79,7 @@
       $http.post('/api/login', {user: credentials.username, password: credentials.password }).   
           success(function(data, status, headers, config) {
             console.log('working');
+            $location.path('/dashboard');
           }).
             error(function(data, status, headers, config) {
               console.log('did not work');
@@ -97,6 +98,11 @@
   });
 
   app.controller('ApplicationController', function ($scope) {
+      $scope.modalShown = true;
+      $scope.toggleModal = function() {
+        $scope.modalShown = !$scope.modalShown;
+      };
+
       $scope.currentUser = null;
      
       $scope.setCurrentUser = function(username) {
@@ -105,6 +111,33 @@
   });
 
 // ============ LOGIN END ===================
+
+
+//============ MODAL==================
+// http://adamalbrecht.com/2013/12/12/creating-a-simple-modal-dialog-directive-in-angular-js/
+app.directive('modalDialog', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      show: '='
+    },
+    replace: true, // Replace with the template below
+    transclude: true, // we want to insert custom content inside the directive
+    link: function(scope, element, attrs) {
+      scope.dialogStyle = {};
+      if (attrs.width)
+        scope.dialogStyle.width = attrs.width;
+      if (attrs.height)
+        scope.dialogStyle.height = attrs.height;
+      scope.hideModal = function() {
+        scope.show = false;
+      };
+    },
+    template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+  };
+});
+
+//===== MODAL END =========
 
   app.controller('PostController', function(){
     // this.post = 1;
