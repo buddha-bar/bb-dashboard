@@ -355,8 +355,10 @@ stolen mod
   /* A centered div above the overlay with a box shadow. */
   z-index:10000;
   position: absolute;
-  width: 50%; /* Default */
+  width: 550px; /* Default */
 
+  
+  padding: 40px;
   /* Center the dialog */
   top: 50%;
   left: 50%;
@@ -367,9 +369,17 @@ stolen mod
   background-color: #fff;
   box-shadow: 4px 4px 80px #000;
 }
+.store-group{
+  font-size: 17px;
+}
+button.hidden{
+  width: 100%;
+}
 .ng-modal-dialog-content {
-  padding:10px;
   text-align: left;
+}
+.ng-modal-dialog-content ul {
+  list-style: none;
 }
 .ng-modal-close {
   position: absolute;
