@@ -8,13 +8,13 @@ var bEtsy = require('../lib/buddhaetsy');
 var etsy = require('../lib/buddhaetsy/etsy');
 
 module.exports = function(app) {
-  // function requireLogin (req, res, next) {
-  //   if (!req.user) {
-  //     res.redirect('/login');
-  //   } else {
-  //     next();
-  //   }
-  // };
+  var requireLogin = function(req, res, next) {
+    if (!req.user) {
+      res.redirect('/login');
+    } else {
+      next();
+    }
+  };
   var User = mongoose.model('User');
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
@@ -35,28 +35,28 @@ module.exports = function(app) {
   app.get('/', function(req, res){
   //whatever regan needs to signup page?
   });
-  app.post('/login', function(req, res){
+  // app.post('/login', function(req, res){
 
-  });
+  // });
 
-  app.get('/signup', function(req, res){
-  //whatever regan needs to signup page?
-  });
-  //get info from username
-  app.post('/signup', function(req, res){
-    var newuser = User.new({
-      username: req.params.username,
-      password: req.params.password
-    })
-    newuser.save(function (err) {
-      if(!err){
-        console.dir(newuser);
-      }
-      else {
-        console.log(err);
-      }
-    });
-  });
+  // app.get('/signup', function(req, res){
+  // //whatever regan needs to signup page?
+  // });
+  // //get info from username
+  // app.post('/signup', function(req, res){
+  //   var newuser = User.new({
+  //     username: req.params.username,
+  //     password: req.params.password
+  //   })
+  //   newuser.save(function (err) {
+  //     if(!err){
+  //       console.dir(newuser);
+  //     }
+  //     else {
+  //       console.log(err);
+  //     }
+  //   });
+  // });
 
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
@@ -218,7 +218,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/login', function(req, res, next){
+  app.post('/api/login', requireLogin, function(req, res, next){
 
     var User = mongoose.model('User');
     var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){

@@ -52,12 +52,12 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.cookieParser());
+app.use(cookieParser());
 app.use(session({
-  cookieName: 'session'
+  cookieName: 'session',
     secret: 'something',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000,
 }));
@@ -94,20 +94,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 // });
 //make sesssions available to the router?
 app.use(function(req, res, next) {
-  // if (req.session && req.session.user) {
-  //   User.findOne({ username: req.session.user.username }, function(err, user) {
-  //     if (user) {
-  //       req.user = user;
-  //       delete req.user.password; // delete the password from the session
-  //       req.session.user = user;  //refresh the session value
-  //       res.locals.user = user;
-  //     }
-  //     // finishing processing the middleware and run the route
-  //     next();
-  //   });
-  // } else {
-  //   next();
-  // }
+  if (req.session && req.session.user) {
+    User.findOne({ username: req.session.user.username }, function(err, user) {
+      if (user) {
+        req.user = currentUser;
+        delete req.user.password; // delete the password from the session
+        req.session.user = currentUser;  //refresh the session value
+        res.locals.user = currentUser;
+      }
+      // finishing processing the middleware and run the route
+      next();
+    });
+  } else {
+    next();
+  }
 });
 // Make our db accessible to our router
 app.use(function(req, res, next){
