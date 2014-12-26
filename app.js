@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
+var session = require('client-sessions');
+
 
 // var users = require('./routes/users');
 var fs = require('fs');
@@ -52,10 +54,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
+  cookieName: 'session',
     secret: 'something',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000,
 }));
+
 
 // Attach Routes: 'index.js'
 require('./routes/index')(app);
@@ -86,7 +92,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     err.status = 404;
 //     next(err);
 // });
-
+//make sesssions available to the router?
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    User.findOne({ username: req.session.user.username }, function(err, user) {
+      if (user) {
+        req.user = currentUser;
+        delete req.user.password; // delete the password from the session
+        req.session.user = currentUser;  //refresh the session value
+        res.locals.user = currentUser;
+      }
+      // finishing processing the middleware and run the route
+      next();
+    });
+  } else {
+    next();
+  }
+});
 // Make our db accessible to our router
 app.use(function(req, res, next){
   req.db = db;
