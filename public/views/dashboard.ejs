@@ -14,43 +14,13 @@
 </div>
 
 <div ng-controller="AuthoCtrl">
-  <!-- <button ng-click='toggleModal()'>Open Modal Dialog</button> -->
   <modal-dialog show='modalShown'>
-  <h3>Welcome to Buddha Bar!</h3>
-  <p>To finish setting up your account please select the stores you would like to integrate with your account</p>
-    <!-- <ul> 
-      <li>Add Etsy <button ng-click='goEtsy()'>Connect</button></li>
-      <li>Add Amazon <button ng-click='goAmazon()'>Connect</button></li>
-      <li>Add Ebay <button ng-click='goEbay()'>Connect</button></li>
-    </ul> -->
-    <!-- <ul> 
-      <li><button ng-click='goEtsy()'>Connect with Etsy</button></li>
-      <li><button ng-click='goAmazon()'>Connect with Amazon</button></li>
-      <li><button ng-click='goEbay()'>Connect with Ebay</button></li>
-    </ul> -->
+    <h3>Welcome to Buddha Bar!</h3>
+    <p>To finish setting up your account please select the stores you would like to integrate with your account</p>
     <ul class="store-group"> 
       <li><a ng-click='goEtsy()'>Add Etsy</a></li>
       <li><a ng-click='goAmazon()'>Add Amazon</a></li>
       <li><a ng-click='goEbay()'>Add Ebay</a></li>
     </ul>
-    <!-- <ul class="button-group"> 
-      <li><button ng-click='goEtsy()'>Connect</button></li>
-      <li><button ng-click='goAmazon()'>Connect</button></li>
-      <li><button ng-click='goEbay()'>Connect</button></li>
-    </ul> -->
   </modal-dialog>
 </div>
-
-<!-- <div ng-hide="showmod">
-    <div class="modal-background">
-      <div id="autho-modal">
-        <ul> 
-          <li ui-sref=".etsy">Add Etsy <button>Connect</button></li>
-          <li>Add Amazon <button>Connect</button></li>
-          <li>Add Ebay <button>Connect</button></li>
-          <button ng-click="showmod=false">Finished</button>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>  -->

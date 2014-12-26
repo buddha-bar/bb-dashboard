@@ -37,14 +37,6 @@ body {
   background-color: #ed2533;
 } 
 
-/*.top-bar-section li.active:not(.has-form) a:not(.button) {
-  background-color: #fa3c45;
-}
-
-.top-bar-section li.active:not(.has-form) a:not(.button):hover {
-  background-color: #ed2533;
-}*/
-
 .top-bar-section ul li > a {
   font-size: 1em;
 }
@@ -56,7 +48,9 @@ body {
 .top-bar .name img {
   padding-right: 20px;
 }
-
+.top-bar .title-area{
+  height: 70px;
+}
 
 /* ==== TOP BAR/NAV ===== */
 
@@ -104,10 +98,16 @@ body {
   float: left;
   margin-bottom: 20px;
   width: 80px;
+  height: 80px;
 }
+
+.add-stock input {
+  width: 80px;
+}
+
 p.ng-binding {
   margin-bottom: 0;
-  float: left;
+  /*float: left;*/
   width: 80%;
 }
 
@@ -115,19 +115,16 @@ h3.ng-binding {
   font-size: 20px;
   font-weight: 200;
   width: 80%;
+  margin: 0;
 }
 
+.large-12.columns {
+  padding: 0;
+}
 
 /*
 /*========= Store Select =============*/
 
-/* may want to add back */
-/*.store-select {
-  background: #063C54;
-  color: #777e86;
-  width: 100%;
-  height: 91vh;
-}*/
 
 .wrapper-checkbox {
   float: left;
@@ -143,36 +140,6 @@ h3.ng-binding {
   font-weight: 200;
   font-size: 2em;
 }
-/*
-h1 {
-  font-size: 2em;
-}
-
-h2 {
-  font-size: 0.9em;
-}*/
-
-
-/*section {
-  width: 50%;
-  margin: 100px auto;
-  text-align: center;
-}
-@media (max-width: 1600px) {
-  section {
-    width: 50%;
-  }
-}
-@media (max-width: 1250px) {
-  section {
-    width: 70%;
-  }
-}
-@media (max-width: 850px) {
-  section {
-    width: 90%;
-  }
-}*/
 
 .checkbox {
   height: 60px;
@@ -260,13 +227,6 @@ h2 {
   
 }
 
-/*[class*="entypo-"]:before {
-  font-family: 'entypo', sans-serif;
-  font-size: 2.3em;
-  line-height: 50px;
-}*/
-
-
 /* ====== esty form ========== */
 
 .postform {
@@ -335,13 +295,7 @@ h2 {
   /*background-color: #B44E4A;*/
 }
 
-
-/* 
-stolen mod
-*/
-
 .ng-modal-overlay {
-  /* A dark translucent div that covers the whole screen */
   position:absolute;
   z-index:9999;
   top:0;
@@ -352,14 +306,10 @@ stolen mod
   opacity: 0.8;
 }
 .ng-modal-dialog {
-  /* A centered div above the overlay with a box shadow. */
   z-index:10000;
   position: absolute;
-  width: 550px; /* Default */
-
-  
+  max-width: 550px;
   padding: 40px;
-  /* Center the dialog */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

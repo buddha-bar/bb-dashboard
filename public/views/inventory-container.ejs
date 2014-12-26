@@ -9,16 +9,45 @@
   <div class="clear"></div>
   
   <div ng-repeat="item in inventory"> 
-    <img ng-src="http:{{item.image}}" />
+    <!-- <img ng-src="http:{{item.image}}" width="50px" height="50px" /> -->
     
     <h3>{{item.name}}</h3>
-    <p> Stock level: {{item.stock}}</p>
+    <p>Current stock level: {{item.stock}}</p>
 
-    <form ng-submit="updateItemCount(item, newStockCount)">
-      <input type="number" ng-model="newStockCount"> 
+    <!-- <form class="add-stock" ng-submit="updateItemCount(item, newStockCount)">
+      <p>Update Stock</p>
+      <input type="number" ng-model="newStockCount">
       <input type="submit">
-    </form>
+    </form> -->
 
-    <div class="clear"></div>
+    <div class="row">
+      <div class="large-12 columns">
+        <form class="row collapse" ng-submit="updateItemCount(item, newStockCount)">
+          <div class="small-8 columns">
+            <input type="number" ng-model="newStockCount" placeholder="Update Stock">
+          </div>
+          <div class="small-4 columns">
+            <input type="submit" class="button postfix">
+            <!-- <a href="#" class="button postfix">Update</a> -->
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="large-12 columns">
+        <form class="row collapse">
+          <div class="small-8 columns">
+            <input type="number" ng-model="newStockCount" placeholder="Update Stock">
+          </div>
+          <div class="small-4 columns">
+            <input type="submit" class="button postfix">
+            <a href="#" class="button postfix">Update</a>
+          </div>
+        </form>
+      </div>
+    </div> -->
+
+    <!-- <div class="clear"></div> -->
   </div>
 </div>
