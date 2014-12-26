@@ -105,17 +105,25 @@ body {
   width: 80px;
 }
 
+.postfix.button {
+  background-color: #063C54;
+}
+
 p.ng-binding {
   margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 100;
   /*float: left;*/
-  width: 80%;
+/*  width: 80%;*/
 }
 
 h3.ng-binding {
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 200;
   width: 80%;
   margin: 0;
+  text-transform: capitalize;
+  padding-bottom: 5px;
 }
 
 .large-12.columns {

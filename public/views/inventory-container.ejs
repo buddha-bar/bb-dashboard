@@ -10,7 +10,7 @@
   
   <div ng-repeat="item in inventory"> 
     <!-- <img ng-src="http:{{item.image}}" width="50px" height="50px" /> -->
-    
+    <hr />
     <h3>{{item.name}}</h3>
     <p>Current stock level: {{item.stock}}</p>
 
@@ -34,20 +34,5 @@
       </div>
     </div>
 
-    <!-- <div class="row">
-      <div class="large-12 columns">
-        <form class="row collapse">
-          <div class="small-8 columns">
-            <input type="number" ng-model="newStockCount" placeholder="Update Stock">
-          </div>
-          <div class="small-4 columns">
-            <input type="submit" class="button postfix">
-            <a href="#" class="button postfix">Update</a>
-          </div>
-        </form>
-      </div>
-    </div> -->
-
-    <!-- <div class="clear"></div> -->
   </div>
 </div>
