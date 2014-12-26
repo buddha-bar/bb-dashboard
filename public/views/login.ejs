@@ -1,14 +1,31 @@
-<div class="wrapper" ng-controller="LoginController">
-  <div class="login-wrapper">
-    <div id="login">
-      <h1> Login </h1>
+<div ng-controller="LoginController">
+  <div class="wrapper">
+    <div class="login-wrapper">
+      <div id="login">
+        <h1> Login </h1>
 
-      <form ng-submit="login(credentials)">
-        <input type="text" placeholder="Username" ng-model="credentials.username">
-        <input type="password" placeholder="Password" ng-model="credentials.password">
-        <input type="submit">
-      </form>
+        <form ng-submit="login(credentials)">
+          <input type="text" placeholder="Username" ng-model="credentials.username">
+          <input type="password" placeholder="Password" ng-model="credentials.password">
+          <input type="submit" ng-click="showmod=true">
+        </form>
 
+      </div>
     </div>
   </div>
-</div>
+
+  <!-- needs to only show if login works -->
+<!--   <div ng-show="showmod">
+    <div class="modal-background">
+      <div id="autho-modal">
+        <ul> 
+          <li ui-sref=".etsy">Add Etsy <button>Connect</button></li>
+          <li>Add Amazon <button>Connect</button></li>
+          <li>Add Ebay <button>Connect</button></li>
+          <button ui-sref="dashboard">Finished</button>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+

@@ -12,3 +12,15 @@
     <div ebay-container></div>
   </div>
 </div>
+
+<div ng-controller="AuthoCtrl">
+  <modal-dialog show='modalShown'>
+    <h3>Welcome to Buddha Bar!</h3>
+    <p>To finish setting up your account please select the stores you would like to integrate with your account</p>
+    <ul class="store-group"> 
+      <li><a ng-click='goEtsy()'>Add Etsy</a></li>
+      <li><a ng-click='goAmazon()'>Add Amazon</a></li>
+      <li><a ng-click='goEbay()'>Add Ebay</a></li>
+    </ul>
+  </modal-dialog>
+</div>

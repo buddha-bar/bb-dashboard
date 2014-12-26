@@ -19,17 +19,6 @@ module.exports = function(app) {
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
 
-  // Should get all users
-  app.get('/users', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find(function(err, users){
-      if(err){ return next(err); }
-
-      res.json(users);
-      console.log(users);
-    });
-  });
-
   // 
 
   app.get('/', function(req, res){
@@ -92,7 +81,7 @@ module.exports = function(app) {
       if (err) {
         console.log(err);
       }
-      res.json(body);
+      // res.json(body);
       console.log(req.session.token);
       console.log(req.session.sec);
       //new constructor copying not creating new.
@@ -116,6 +105,8 @@ module.exports = function(app) {
       //   }
       // });
     });
+    // redirect back to dashbaord; are we still getting information?
+    res.redirect('/#/dashboard');
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
@@ -226,6 +217,7 @@ module.exports = function(app) {
       console.log(currentUser);
       if(err){ return next(err); }
 
+      res.json(user);
     });
 
   });
@@ -261,6 +253,7 @@ module.exports = function(app) {
   });
 
 };
+
 
 
 
