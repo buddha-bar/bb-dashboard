@@ -6,7 +6,7 @@ var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 var bEtsy = require('../lib/buddhaetsy');
 var etsy = require('../lib/buddhaetsy/etsy');
-
+var ebay = require('ebay-api');
 module.exports = function(app) {
   var requireLogin = function(req, res, next) {
     if (!req.user) {
@@ -19,7 +19,43 @@ module.exports = function(app) {
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
 
+  // Should get all users
+  app.get('/users', function(req, res, next) {
+    var User = mongoose.model('User');
+    User.find(function(err, users){
+      if(err){ return next(err); }
+
+      res.json(users);
+      console.log(users);
+    });
+  });
+
   // 
+  app.get('/ebay',function(req, res){
+  //   ebay.ebayApiPostXmlRequest(
+  //     serviceName: 'Trading', 
+  //     opType : 'GetOrders' 
+
+  //     devName: '8fa0915f-a719-429f-9b67-1a0825b294b8'
+  //     cert: 'a21903b2-fd17-4453-835e-4c44ea3dc2c7' 
+  //     appName: 'DonaldBa-57d8-4a4e-9a01-7aca78e78907' 
+
+  //     sandbox: true 
+
+  //     params: 
+  // // (very long string 
+  //       'OrderStatus': 'Active'
+   
+  //     }, function(error, results){
+  //     if (error) {
+  //       console.dir(error)
+  //     }
+  //     else {
+  //      console.dir(results) 
+  //     }
+  //     };
+  //    });
+  });
 
   app.get('/', function(req, res){
   //whatever regan needs to signup page?
@@ -81,7 +117,7 @@ module.exports = function(app) {
       if (err) {
         console.log(err);
       }
-      // res.json(body);
+      res.json(body);
       console.log(req.session.token);
       console.log(req.session.sec);
       //new constructor copying not creating new.
@@ -105,8 +141,6 @@ module.exports = function(app) {
       //   }
       // });
     });
-    // redirect back to dashbaord; are we still getting information?
-    res.redirect('/#/dashboard');
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
@@ -217,7 +251,6 @@ module.exports = function(app) {
       console.log(currentUser);
       if(err){ return next(err); }
 
-      res.json(user);
     });
 
   });
@@ -253,7 +286,6 @@ module.exports = function(app) {
   });
 
 };
-
 
 
 
