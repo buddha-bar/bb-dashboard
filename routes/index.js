@@ -37,6 +37,7 @@ module.exports = function(app) {
   //     }
   //   });
   // });
+
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
       console.log(response);
