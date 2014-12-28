@@ -9,6 +9,7 @@ var etsy = require('../lib/buddhaetsy/etsy');
 //test
 var bcrypt =require('bcrypt');
 var jwt = require('jwt-simple');
+var config = require('../config');
 
 module.exports = function(app) {
 
@@ -159,26 +160,26 @@ module.exports = function(app) {
   //regan estract data from db (temp)
 
   // Should get all users
-  app.get('api/users', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find(function(err, users){
-      if(err){ return next(err); }
+  // app.get('api/users', function(req, res, next) {
+  //   var User = mongoose.model('User');
+  //   User.find(function(err, users){
+  //     if(err){ return next(err); }
 
-      res.json(users);
-      console.log(users);
-    });
-  });
+  //     res.json(users);
+  //     console.log(users);
+  //   });
+  // });
 
   // Get user
-  app.get('api/user', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find({username:'BillyBob'},function(err, foundItems){
-      if(err){ return next(err); }
+  // app.get('api/user', function(req, res, next) {
+  //   var User = mongoose.model('User');
+  //   User.find({username:'BillyBob'},function(err, foundItems){
+  //     if(err){ return next(err); }
 
-      res.json(foundItems);
-      console.log(foundItems);
-    });
-  });
+  //     res.json(foundItems);
+  //     console.log(foundItems);
+  //   });
+  // });
 
   // Should get all user items
 
@@ -226,7 +227,25 @@ module.exports = function(app) {
   })
 
   app.get('/api/users', function(req, res, next) {
+    if(!req.headers['x-auth']){
+      return res.send(401)
+    }
+    var auth = jwt.decode(req.headers['x-auth'], config.secret)
+    User.findOne({username: auth.username}, function (err,user){
+      if (err) {return next(err)}
+        res.json(user)
+    })
+  })
 
+  app.post('/api/users', function(req, res, next) {
+    var user = new User({username: req.body.username})
+    bcrypt.hash(req.body.password, 10, function (err, hash){
+      if (err) {return next (err)}
+      user.password = hash
+      user.save(function (err){
+        res.send(201)
+      })
+    })
   })
 
 // should recive and update item stock

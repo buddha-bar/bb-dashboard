@@ -91,8 +91,9 @@
 
   app.controller('LoginCtrl', function($scope, UserSvc){
     $scope.login = function(username, password) {
-      UserSvc.login(username, password).then(function(user) {
-        console.log(user)
+      UserSvc.login(username, password)
+      .then(function(response) {
+        $scope.$emit('login', response.data)
       })
     }
   });
@@ -124,17 +125,17 @@
 
   // });
 
-  app.controller('ApplicationController', function ($scope) {
+  app.controller('ApplicationCtrl', function($scope) {
       $scope.modalShown = true;
       $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
       };
 
-      $scope.currentUser = null;
+      // $scope.currentUser = null;
      
-      $scope.setCurrentUser = function(username) {
-        $scope.currentUser = username;
-      };
+      $scope.$on('login', function (_, user){
+        $scope.currentUser = user
+      })
   });
 
 // ============ LOGIN END ===================
