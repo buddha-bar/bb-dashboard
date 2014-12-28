@@ -6,6 +6,9 @@ var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 var bEtsy = require('../lib/buddhaetsy');
 var etsy = require('../lib/buddhaetsy/etsy');
+//test
+var bcrypt =require('bcrypt');
+var jwt = require('jwt-simple');
 
 module.exports = function(app) {
 
@@ -195,18 +198,36 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/login', function(req, res, next){
+  // app.post('/api/login', function(req, res, next){
 
-    var User = mongoose.model('User');
-    var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
-      // console.log(req.params);
-      console.log(currentUser);
-      if(err){ return next(err); }
+  //   var User = mongoose.model('User');
+  //   var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
+  //     // console.log(req.params);
+  //     console.log(currentUser);
+  //     if(err){ return next(err); }
 
-      res.json(user);
-    });
+  //     res.json(user);
+  //   });
+  // });
 
-  });
+  app.post('/api/sessions', function(req, res, next) {
+    User.findOne({username: req.body.username})
+    .select('password').select('username')
+    .exec( function(err, user){
+      if (err) {return next(err)}
+      if (!user) {return res.send(401)}
+      bcrypt.compare(req.body.password, user.password, function (err, valid){
+        if (err) {return next(err)}
+        if (!valid) {return res.send(401)}
+        var token = jwt.encode({username: user.username}, config.secret)
+        res.send(token)
+      })
+    })
+  })
+
+  app.get('/api/users', function(req, res, next) {
+
+  })
 
 // should recive and update item stock
   app.post('/api/:storeType/items/:itemId', function(req, res, next){

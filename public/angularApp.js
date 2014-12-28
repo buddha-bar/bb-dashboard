@@ -71,31 +71,58 @@
 
 // ======== LOGIN =================
 
-  app.controller('LoginController', function($scope, $location, $http){
+
+  app.service('UserSvc', function($http){
+    var svc = this;
+    svc.getUser = function() {
+      return $http.get('/api/users',{
+        headers: { 'X-Auth': this.token }
+      })
+    }
+    svc.login = function(username, password){
+      return $http.post('/api/sessions', {
+        username: username, password: password
+      }).then(function(val){
+        svc.token = val.data
+        return svc.getUser()
+      })
+    }
+  })
+
+  app.controller('LoginCtrl', function($scope, UserSvc){
+    $scope.login = function(username, password) {
+      UserSvc.login(username, password).then(function(user) {
+        console.log(user)
+      })
+    }
+  });
+
+
+  // app.controller('LoginController', function($scope, $location, $http){
 
    
-    $scope.login = function(credentials) {
+  //   $scope.login = function(credentials) {
 
-      $http.post('/api/login', {user: credentials.username, password: credentials.password }).   
-          success(function(data, status, headers, config) {
-            console.log('working');
-            $location.path('/dashboard');
-          }).
-            error(function(data, status, headers, config) {
-              console.log('did not work');
-          }); 
-    }
+  //     $http.post('/api/login', {user: credentials.username, password: credentials.password }).   
+  //         success(function(data, status, headers, config) {
+  //           console.log('working');
+  //           $location.path('/dashboard');
+  //         }).
+  //           error(function(data, status, headers, config) {
+  //             console.log('did not work');
+  //         }); 
+  //   }
 
-    $scope.logout = function(credentials) {
+  //   $scope.logout = function(credentials) {
 
-      $http.post('/api/logout', {user: credentials.username }).   
-          success(function(data, status, headers, config) {
-          }).
-            error(function(data, status, headers, config) {
-          }); 
-    }
+  //     $http.post('/api/logout', {user: credentials.username }).   
+  //         success(function(data, status, headers, config) {
+  //         }).
+  //           error(function(data, status, headers, config) {
+  //         }); 
+  //   }
 
-  });
+  // });
 
   app.controller('ApplicationController', function ($scope) {
       $scope.modalShown = true;
