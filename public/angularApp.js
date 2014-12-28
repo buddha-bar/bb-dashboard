@@ -84,9 +84,27 @@
         username: username, password: password
       }).then(function(val){
         svc.token = val.data
+        // window.localStorage.token = val.data
         return svc.getUser()
       })
     }
+    // svc.logout = function() {
+    //   return $http.post('/api/sessions', {
+    //     username: username, password: password
+    //   }).then(function(val){
+    //     svc.token = null
+    //   })
+    // }
+    svc.logout = function() {
+      $http.post('/api/sessions', {
+        username: null, password: null
+      }).then(function(val){
+        svc.token = null
+      })
+    }
+    // svc.logout = function(val) {
+    //   svc.token = null
+    // }
   })
 
   app.controller('LoginCtrl', function($scope, UserSvc){
@@ -96,6 +114,16 @@
         $scope.$emit('login', response.data)
       })
     }
+    $scope.logout = function() {
+      UserSvc.logout();
+      $scope.$emit('logout')
+    }
+    // $scope.logout = function() {
+    //   UserSvc.logout()
+    //   .then(function(response){
+    //     $scope.$emit('logout', response.data)
+    //   })
+    // }
   });
 
 
@@ -127,14 +155,23 @@
 
   app.controller('ApplicationCtrl', function($scope) {
       $scope.modalShown = true;
-      $scope.toggleModal = function() {
-        $scope.modalShown = !$scope.modalShown;
-      };
+      // $scope.toggleModal = function() {
+      //   console.log('clicked');
+      //   $scope.modalShown = !$scope.modalShown;
+      // };
 
       // $scope.currentUser = null;
      
       $scope.$on('login', function (_, user){
-        $scope.currentUser = user
+        $scope.currentUser = user;
+      })
+
+      // $scope.$on('logout', function (_, user){
+      //   $scope.currentUser = null;
+      // })
+
+      $scope.$on('logout', function (){
+        $scope.currentUser = null;
       })
   });
 
