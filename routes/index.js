@@ -32,30 +32,46 @@ module.exports = function(app) {
 
   // 
   app.get('/ebay',function(req, res){
-  //   ebay.ebayApiPostXmlRequest(
+    ebay.ebayApiGetRequest({
+      'serviceName': 'Shopping',
+      'opType': 'GetSingleItem',
+      'appId': 'DonaldBa-57d8-4a4e-9a01-7aca78e78907',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
+  
+      params: {
+        'ItemId': '110154659744'      // FILL IN A REAL ItemID
+      }
+    },
+    function(error, data) {
+      if (error) console.log(error);
+      console.log(data);
+    });
+  //   ebay.ebayApiPostXmlRequest({
   //     serviceName: 'Trading', 
-  //     opType : 'GetOrders' 
+  //     opType : 'GetOrders', 
 
-  //     devName: '8fa0915f-a719-429f-9b67-1a0825b294b8'
-  //     cert: 'a21903b2-fd17-4453-835e-4c44ea3dc2c7' 
-  //     appName: 'DonaldBa-57d8-4a4e-9a01-7aca78e78907' 
+  //     devName: 'donaldballarddev',
+  //     cert: 'a21903b2-fd17-4453-835e-4c44ea3dc2c7' ,
+  //     appName: 'DonaldBa-57d8-4a4e-9a01-7aca78e78907', 
 
-  //     sandbox: true 
+  //     sandbox: true, 
 
-  //     params: 
+  //     params: { 
   // // (very long string 
   //       'OrderStatus': 'Active'
-   
-  //     }, function(error, results){
+  //     }
+  //   }, function(error, results){
   //     if (error) {
-  //       console.dir(error)
+  //       console.dir(error);
+  //       process.exit(1);
   //     }
-  //     else {
-  //      console.dir(results) 
-  //     }
-  //     };
-  //    });
+  //      console.dir(results); 
+  //   });
   });
+  app.get('/ebay/auth', function(req, res){
+    console.dir(req);
+    console.dir(res);
+  });
+  
 
   app.get('/', function(req, res){
   //whatever regan needs to signup page?
