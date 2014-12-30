@@ -6,7 +6,7 @@
     <!-- <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> -->
   </ul>
 
-  <section class="top-bar-section">
+  <section class="top-bar-section" ng-controller="LoginCtrl">
     <ul class="right">
       <li>
         <a ui-sref="dashboard">Dashboard</a>
@@ -14,14 +14,14 @@
       <li class="pink">
         <a ui-sref="post-item">Post New Item!</a>
       </li>
-      <!-- <li>
+      <li>
         <a ng-click='logout()'>Logout</a>
-      </li> -->
+      </li>
       <li class="has-dropdown">
         <a href=""><span ng-if="currentUser">{{ currentUser.username }}</span></a>
         <ul class="dropdown">
           <li><a href="http://google.com">Settings</a></li>
-          <li ng-controller="LoginCtrl"><a ng-click="logout()">Logout</a></li>
+          <li><a ng-click="logout()">Logout</a></li>
         </ul>
       </li>
     </ul>

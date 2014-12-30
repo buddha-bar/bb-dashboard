@@ -12,13 +12,6 @@
         url: "",
         templateUrl: "views/login.ejs"
       })
-      // .state('login.etsy', {
-      //   url: "/etsy",
-        // templateUrl: "partials/state1.list.html",
-        // controller: function($scope) {
-        //   $scope.items = ["A", "List", "Of", "Items"];
-        // }
-      // })
       .state('dashboard', {
         url: "/dashboard",
         templateUrl: "views/dashboard.ejs"
@@ -71,6 +64,7 @@
 
 // ======== LOGIN =================
 
+  // $locationProvider.html5Mode(true)
 
   app.service('UserSvc', function($http){
     var svc = this;
@@ -84,7 +78,7 @@
         username: username, password: password
       }).then(function(val){
         svc.token = val.data
-        // window.localStorage.token = val.data
+        // svc.token = window.localStorage.token
         return svc.getUser()
       })
     }
@@ -96,14 +90,16 @@
     //   })
     // }
     svc.logout = function() {
-      $http.post('/api/sessions', {
-        username: null, password: null
-      }).then(function(val){
         svc.token = null
-      })
+        // svc.token = window.localStorage.token
     }
-    // svc.logout = function(val) {
-    //   svc.token = null
+    // svc.logout = function() {
+    //   $http.post('/api/sessions', {
+    //     username: null
+    //   }).then(function(val){
+    //     svc.token = null
+    //     // svc.token = window.localStorage.token
+    //   })
     // }
   })
 
@@ -119,12 +115,6 @@
       UserSvc.logout();
       $scope.$emit('logout')
     }
-    // $scope.logout = function() {
-    //   UserSvc.logout()
-    //   .then(function(response){
-    //     $scope.$emit('logout', response.data)
-    //   })
-    // }
   });
 
 
@@ -154,27 +144,24 @@
 
   // });
 
-  app.controller('ApplicationCtrl', function($scope) {
-      $scope.modalShown = true;
-      // $scope.toggleModal = function() {
-      //   console.log('clicked');
-      //   $scope.modalShown = !$scope.modalShown;
-      // };
+  app.controller('ApplicationCtrl', function($scope, UserSvc) {
 
-      // $scope.currentUser = null;
-     
-      $scope.$on('login', function (_, user){
-        $scope.currentUser = user;
-      })
+    // angular.element(document).ready(function () {
+    //   $scope.currentUser = UserSvc.getUser();
+    // })
 
-      // $scope.$on('logout', function (_, user){
-      //   $scope.currentUser = null;
-      // })
+    $scope.modalShown = true;
 
-      $scope.$on('logout', function (){
-        $scope.currentUser = null;
-      })
+    $scope.$on('login', function (_, user){
+      $scope.currentUser = user;
+    })
+
+    $scope.$on('logout', function (){
+      $scope.currentUser = null;
+    })
   });
+
+
 
 // ============ LOGIN END ===================
 

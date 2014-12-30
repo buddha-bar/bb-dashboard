@@ -228,6 +228,8 @@ module.exports = function(app) {
   })
 
   app.get('/api/users', function(req, res, next) {
+    console.log(req.headers)
+    console.log('hellllooooooo')
     if(!req.headers['x-auth']){
       return res.send(401)
     }
