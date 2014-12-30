@@ -1,7 +1,11 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #F2F2F2;
 }
 
+h1 {
+  color: #063C54;
+}
 /* ==== TOP BAR/NAV ===== */
 .top-bar {
   background-color: #063C54;
@@ -65,9 +69,12 @@ body {
 .fa-refresh {
   margin-left: 10px;
 }
+.white {
+  background-color: #fff;
+}
 
 .store-container {
-  height: 91vh;
+  /*height: 91vh;*/
   border-right: 1px solid #000;
   border-top: 1px solid #000;
   /*border-radius: 7px;*/
@@ -96,7 +103,7 @@ body {
 .item img {
   margin-right: 15px;
   float: left;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   width: 80px;
   height: 80px;
 }
@@ -122,6 +129,7 @@ h3.ng-binding {
   font-weight: 200;
   width: 80%;
   margin: 0;
+  padding-top: 10px;
   text-transform: capitalize;
   padding-bottom: 5px;
 }
@@ -133,6 +141,10 @@ h3.ng-binding {
 /*
 /*========= Store Select =============*/
 
+.store-header {
+  padding-top: 30px;
+  padding-bottom: 18px;
+}
 
 .wrapper-checkbox {
   float: left;
@@ -296,6 +308,7 @@ h3.ng-binding {
   font-weight: bold;
   margin-bottom: 2em;
   text-transform: uppercase;
+  background-color: #063C54;
   width: 230px;
 }
 

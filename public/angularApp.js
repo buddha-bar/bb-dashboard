@@ -82,6 +82,15 @@
         return svc.getUser()
       })
     }
+    // svc.createUser = function(username, password){
+    //   return $http.get('/api/sessions', {
+    //     username: username, password: password
+    //   }).then(function(val){
+    //     svc.token = val.data
+    //     // svc.token = window.localStorage.token
+    //     return svc.getUser()
+    //   })
+    // }
     // svc.logout = function() {
     //   return $http.post('/api/sessions', {
     //     username: username, password: password
@@ -108,9 +117,17 @@
       UserSvc.login(username, password)
       .then(function(response) {
         $scope.$emit('login', response.data)
-        $location.path('/dashboard');
+        // $location.path('/dashboard');
       })
     }
+    // $scope.register = function(username, password){
+    //   UserSvc.createUser(username, password)
+    //   UserSvc.login(username, password)
+    //   .then(function(response) {
+    //     $scope.$emit('login', response.data)
+    //     // $location.path('/dashboard');
+    //   })
+    // }
     $scope.logout = function() {
       UserSvc.logout();
       $scope.$emit('logout')
