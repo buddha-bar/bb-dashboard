@@ -17,13 +17,13 @@ h1 {
 }
 
 .top-bar-section li:not(.has-form) a:not(.button):hover {
-  background-color: #fafafa;
+  background-color: #F2F2F2;
   color: #000;
 }
 
 .top-bar-section li:not(.has-form) a:not(.button) {
   line-height: 70px;
-  background-color: #fff;
+  background-color: #fafafa;
   color: #000;
 }
 
@@ -76,7 +76,7 @@ h1 {
 .store-container {
   /*height: 91vh;*/
   border-right: 1px solid #000;
-  border-top: 1px solid #000;
+  /*border-top: 1px solid #000;*/
   /*border-radius: 7px;*/
   width: 100%;
   margin: 0;
@@ -156,7 +156,8 @@ h3.ng-binding {
 }
 
 .store-select h2 {
-  color: #fff;
+  color: #000;
+  text-align: center;
   font-weight: 200;
   font-size: 2em;
 }
@@ -165,7 +166,7 @@ h3.ng-binding {
   height: 60px;
   width: 100%;
   position: relative;
-  background: #eee; /*F7F7F5*/
+  background: #fff; /*F7F7F5*/
   display: inline-block;
   margin: 15px 2% 15px;
   border-radius: 2px;
@@ -179,7 +180,7 @@ h3.ng-binding {
   }
 }
 .checkbox:hover {
-  background: #fff;
+  background: #fafafa;
 }
 
 .figure-container {
