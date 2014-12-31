@@ -337,15 +337,21 @@ h3.ng-binding {
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
-
   background-color: #fff;
   box-shadow: 4px 4px 80px #000;
 }
 .store-group{
   font-size: 17px;
 }
+.store-group a{
+  color: #202120;
+}
+.store-group a:visited {
+  color: #eee;
+}
 button.hidden{
   width: 100%;
+  background-color: #7fa583;
 }
 .ng-modal-dialog-content {
   text-align: left;
