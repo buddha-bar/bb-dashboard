@@ -1,15 +1,19 @@
 (function(){
-  var app = angular.module('dashboard', ['ngResource', 'ui.router', 'ngRoute']);
+  var app = angular.module('dashboard', [
+    'ngResource', 
+    'ui.router', 
+    'ngRoute'
+  ]);
 
   app.config(function($stateProvider, $urlRouterProvider) {
     //
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/404");
+    // For any unmatched url, redirect to root
+    $urlRouterProvider.otherwise("/");
     //
     // Now set up the states
     $stateProvider
       .state('login', {
-        url: "",
+        url: "/",
         templateUrl: "views/login.ejs"
       })
       .state('dashboard', {
@@ -78,10 +82,10 @@
         username: username, password: password
       }).then(function(val){
         svc.token = val.data
-        // svc.token = window.localStorage.token
         return svc.getUser()
       })
     }
+
     // svc.createUser = function(username, password){
     //   return $http.get('/api/sessions', {
     //     username: username, password: password
@@ -113,11 +117,25 @@
   })
 
   app.controller('LoginCtrl', function($scope, $location, UserSvc){
+
+    $scope.initialize = function(){
+      if(window.localStorage.getItem("currentUser") !== null ){
+        $scope.currentUser = JSON.parse(window.localStorage.getItem("currentUser"));
+        $location.path("/dashboard");
+      }
+    }
+
     $scope.login = function(username, password) {
       UserSvc.login(username, password)
       .then(function(response) {
-        $scope.$emit('login', response.data)
-        // $location.path('/dashboard');
+        if(response.status == 200){
+          window.localStorage.setItem("currentUser", JSON.stringify(response.data));
+          $scope.error = null;
+          $scope.$emit('login', response.data);
+          $location.path('/dashboard');          
+        } else {
+          $scope.error = "Sorry! Something went wrong";
+        }
       })
     }
     // $scope.register = function(username, password){
@@ -132,6 +150,8 @@
       UserSvc.logout();
       $scope.$emit('logout')
     }
+
+    $scope.initialize();
   });
 
 
@@ -161,7 +181,7 @@
 
   // });
 
-  app.controller('ApplicationCtrl', function($scope, UserSvc) {
+  app.controller('ApplicationCtrl', function($scope, $location, UserSvc) {
 
     // angular.element(document).ready(function () {
     //   $scope.currentUser = UserSvc.getUser();
@@ -170,11 +190,17 @@
     $scope.modalShown = true;
 
     $scope.$on('login', function (_, user){
-      $scope.currentUser = user;
+      if(window.localStorage.getItem("currentUser") !== null){
+        $scope.currentUser = JSON.parse(window.localStorage.getItem("currentUser"));
+      } else {
+        $location.path("/");
+      }
     })
 
     $scope.$on('logout', function (){
-      $scope.currentUser = null;
+      window.localStorage.removeItem("currentUser");
+      $scope.currentUser = undefined;
+      $location.path("/");
     })
   });
 

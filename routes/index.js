@@ -222,6 +222,7 @@ module.exports = function(app) {
         if (err) {return next(err)}
         if (!valid) {return res.send(401)}
         var token = jwt.encode({username: user.username}, config.secret)
+      console.log(token);
         res.send(token)
       })
     })
