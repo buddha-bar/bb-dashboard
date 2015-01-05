@@ -40,8 +40,36 @@ module.exports = function(app) {
   //     }
   //   });
   // });
+//gets a specific item, the string will be substituted for req.params.itemid or whatever regan sends it
   app.get('/ebay/item', function(req, res){
     daEbay.getEbayItem('110154659744', function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
+    });
+  });
+//gets an items quantity, will be passed ItemID
+  app.get('/ebay/item/count', function(req, res){
+    daEbay.getEbayItemCount('loool', function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
+    });
+  });
+//gets a users ebay information, string will be substituted for req.params.ebay.authToken 
+  app.get('/ebay/userinfo', function(req, res){
+    daEbay.getUsersEbayInfo('authtoken', function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
+    });
+  });
+//gets all items associated with a user, string will be substituted for req.params.ebay.authToken 
+  app.get('/ebay/allitems', function(req, res){
+    daEbay.getAllEbayListings('authtoken', function(err, body){
       if(err){
         console.log(err);
       }
