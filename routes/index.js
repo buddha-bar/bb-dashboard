@@ -6,6 +6,8 @@ var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 var bEtsy = require('../lib/buddhaetsy');
 var etsy = require('../lib/buddhaetsy/etsy');
+var ebay = require('ebay-api');
+var daEbay = require('../lib/buddhaebay');
 //test
 var bcrypt =require('bcrypt');
 var jwt = require('jwt-simple');
@@ -38,7 +40,14 @@ module.exports = function(app) {
   //     }
   //   });
   // });
-
+  app.get('/ebay/item', function(req, res){
+    daEbay.getEbayItem('110154659744', function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
+    });
+  });
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
       console.log(response);
