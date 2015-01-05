@@ -74,7 +74,7 @@ h1 {
 }
 
 .store-container {
-  /*height: 91vh;*/
+  min-height: 91vh;
   border-right: 1px solid #000;
   /*border-top: 1px solid #000;*/
   /*border-radius: 7px;*/
@@ -127,7 +127,7 @@ p.ng-binding {
 h3.ng-binding {
   font-size: 23px;
   font-weight: 200;
-  width: 80%;
+  width: 100%;
   margin: 0;
   padding-top: 10px;
   text-transform: capitalize;
