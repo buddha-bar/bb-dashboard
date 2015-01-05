@@ -40,6 +40,7 @@ module.exports = function(app) {
   //     }
   //   });
   // });
+//THE FOLLOWING ROUTES ARE SUPER ROUGH AND NOT IN WHATSOEVER MADE FOR REGAN....SORRY.
 //gets a specific item, the string will be substituted for req.params.itemid or whatever regan sends it
   app.get('/ebay/item', function(req, res){
     daEbay.getEbayItem('110154659744', function(err, body){
