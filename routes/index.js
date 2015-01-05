@@ -97,7 +97,7 @@ module.exports = function(app) {
       // });
     });
     // redirect back to dashbaord; are we still getting information?
-    res.redirect('/#/dashboard');
+    res.redirect('/api/etsy/getListings');
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
@@ -141,7 +141,7 @@ module.exports = function(app) {
       // console.log(body);
       res.json(body);
     });
-    // console.log(req.body);
+    // res.redirect('/#/dashboard');
   });
 
     // Potentially necesary for updating info in db.
