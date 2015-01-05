@@ -18,6 +18,7 @@ module.exports = function(app) {
   var client = etsy.getClient();
 
   // 
+
   // app.get('/signup', function(req, res){
   // //whatever regan needs to signup page?
   // });
