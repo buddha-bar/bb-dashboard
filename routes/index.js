@@ -140,9 +140,9 @@ module.exports = function(app) {
   app.get('/api/etsy/getListings',function(req, res){
     bEtsy.getAllListings(req, res, function(err, body) {
       // console.log(body);
-      res.json(body);
+       //res.json(body);
     });
-    // res.redirect('/#/dashboard');
+    res.redirect('/#/dashboard');
   });
 
     // Potentially necesary for updating info in db.
