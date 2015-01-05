@@ -222,19 +222,20 @@ module.exports = function(app) {
         if (err) {return next(err)}
         if (!valid) {return res.send(401)}
         var token = jwt.encode({username: user.username}, config.secret)
+      console.log(token);
         res.send(token)
       })
     })
   })
 
-  app.get('/api/users', function(req, res, next) {
-    if(!req.headers['x-auth']){
-      return res.send(401)
+  app.get('/api/users', function (req, res, next) {
+    if (!req.headers['x-auth']) {
+      return res.sendStatus(401)
     }
     var auth = jwt.decode(req.headers['x-auth'], config.secret)
-    User.findOne({username: auth.username}, function (err,user){
-      if (err) {return next(err)}
-        res.json(user)
+    User.findOne({username: auth.username}, function (err, user) {
+      if (err) { return next(err) }
+      res.json(user)
     })
   })
 
