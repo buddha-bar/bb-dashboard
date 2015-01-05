@@ -1,4 +1,22 @@
-<div ng-controller="LoginController">
+<div ng-controller="LoginCtrl">
+  <div class="wrapper">
+    <div class="login-wrapper">
+      <div id="login">
+        <h1> Login </h1>
+        <p class="error" ng-hide="error">{{ error }}</p>
+        <form ng-submit="login(username, password)">
+          <input type="text" placeholder="Username" ng-model="username">
+          <input type="password" placeholder="Password" ng-model="password">
+          <input type="submit" ng-click="showmod=true">
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div ng-controller="LoginController">
   <div class="wrapper">
     <div class="login-wrapper">
       <div id="login">
@@ -12,7 +30,7 @@
 
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- needs to only show if login works -->
 <!--   <div ng-show="showmod">

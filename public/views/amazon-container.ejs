@@ -1,13 +1,14 @@
-<div class='store-container'>
+<div class='store-container white'>
 
   <span class="store-utility-icons">
     <!-- <i class="fa fa-refresh right"></i> -->
     <!-- <i class="fa fa-times-circle-o right"></i> -->
   </span>
   
-  <h1>Amazon</h1>
+  <h1 class="store-header">Amazon</h1>
 
   <div class="item" ng-repeat="item in amazonItems"> 
+    <hr />
     <img ng-src="http:{{item.image}}" width="50px" height="50px" class="left"/>
 
     <div class="left">

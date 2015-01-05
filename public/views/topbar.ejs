@@ -1,4 +1,4 @@
-<nav class="top-bar" role="navigation">
+<nav class="top-bar" role="navigation"> <!-- remove data-topbar -->
   <ul class="title-area">
     <li class="name">
       <h1><img src="/images/bb-logo.png" />Buddha Bar</h1>
@@ -6,7 +6,7 @@
     <!-- <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> -->
   </ul>
 
-  <section class="top-bar-section">
+  <section class="top-bar-section" ng-controller="LoginCtrl">
     <ul class="right">
       <li>
         <a ui-sref="dashboard">Dashboard</a>
@@ -14,11 +14,15 @@
       <li class="pink">
         <a ui-sref="post-item">Post New Item!</a>
       </li>
+      <li ng-switch="currentUser !== undefined">
+        <a ng-switch-when="true" ng-click='logout()'>Logout</a>
+        <a ng-switch-default href="/">Login</a>
+      </li>
       <li class="has-dropdown">
-        <a href="">Username<span ng-if="currentUser">{{ currentUser.name }}</span></a>
+        <a href=""><span ng-if="currentUser">{{ currentUser.username }}</span></a>
         <ul class="dropdown">
-          <li><a href="">Settings</a></li>
-          <li><a href="">Logout</a></li>
+          <li><a href="http://google.com">Settings</a></li>
+          <li><a ng-click="logout()">Logout</a></li>
         </ul>
       </li>
     </ul>

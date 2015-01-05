@@ -6,88 +6,28 @@ var etsyjs = require('etsy-js');
 var mongoose = require('mongoose');
 var bEtsy = require('../lib/buddhaetsy');
 var etsy = require('../lib/buddhaetsy/etsy');
-var ebay = require('ebay-api');
+//test
+var bcrypt =require('bcrypt');
+var jwt = require('jwt-simple');
+var config = require('../config');
+
 module.exports = function(app) {
-  var requireLogin = function(req, res, next) {
-    if (!req.user) {
-      res.redirect('/login');
-    } else {
-      next();
-    }
-  };
+
   var User = mongoose.model('User');
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
 
-  // Should get all users
-  app.get('/users', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find(function(err, users){
-      if(err){ return next(err); }
-
-      res.json(users);
-      console.log(users);
-    });
-  });
-
   // 
-  app.get('/ebay',function(req, res){
-    ebay.ebayApiGetRequest({
-      'serviceName': 'Shopping',
-      'opType': 'GetSingleItem',
-      'appId': 'DonaldBa-57d8-4a4e-9a01-7aca78e78907',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
-  
-      params: {
-        'ItemId': '110154659744'      // FILL IN A REAL ItemID
-      }
-    },
-    function(error, data) {
-      if (error) console.log(error);
-      console.log(data);
-    });
-  //   ebay.ebayApiPostXmlRequest({
-  //     serviceName: 'Trading', 
-  //     opType : 'GetOrders', 
-
-  //     devName: 'donaldballarddev',
-  //     cert: 'a21903b2-fd17-4453-835e-4c44ea3dc2c7' ,
-  //     appName: 'DonaldBa-57d8-4a4e-9a01-7aca78e78907', 
-
-  //     sandbox: true, 
-
-  //     params: { 
-  // // (very long string 
-  //       'OrderStatus': 'Active'
-  //     }
-  //   }, function(error, results){
-  //     if (error) {
-  //       console.dir(error);
-  //       process.exit(1);
-  //     }
-  //      console.dir(results); 
-  //   });
-  });
-  app.get('/ebay/auth', function(req, res){
-    console.dir(req);
-    console.dir(res);
-  });
-  
-
-  app.get('/', function(req, res){
-  //whatever regan needs to signup page?
-  });
-  // app.post('/login', function(req, res){
-
-  // });
 
   // app.get('/signup', function(req, res){
   // //whatever regan needs to signup page?
   // });
+
   // //get info from username
   // app.post('/signup', function(req, res){
   //   var newuser = User.new({
-  //     username: req.params.username,
-  //     password: req.params.password
+  //     username: req.username,
+  //     password: req.password
   //   })
   //   newuser.save(function (err) {
   //     if(!err){
@@ -133,7 +73,7 @@ module.exports = function(app) {
       if (err) {
         console.log(err);
       }
-      res.json(body);
+      // res.json(body);
       console.log(req.session.token);
       console.log(req.session.sec);
       //new constructor copying not creating new.
@@ -157,6 +97,8 @@ module.exports = function(app) {
       //   }
       // });
     });
+    // redirect back to dashbaord; are we still getting information?
+    res.redirect('/#/dashboard');
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
@@ -220,26 +162,26 @@ module.exports = function(app) {
   //regan estract data from db (temp)
 
   // Should get all users
-  app.get('api/users', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find(function(err, users){
-      if(err){ return next(err); }
+  // app.get('api/users', function(req, res, next) {
+  //   var User = mongoose.model('User');
+  //   User.find(function(err, users){
+  //     if(err){ return next(err); }
 
-      res.json(users);
-      console.log(users);
-    });
-  });
+  //     res.json(users);
+  //     console.log(users);
+  //   });
+  // });
 
   // Get user
-  app.get('api/user', function(req, res, next) {
-    var User = mongoose.model('User');
-    User.find({username:'BillyBob'},function(err, foundItems){
-      if(err){ return next(err); }
+  // app.get('api/user', function(req, res, next) {
+  //   var User = mongoose.model('User');
+  //   User.find({username:'BillyBob'},function(err, foundItems){
+  //     if(err){ return next(err); }
 
-      res.json(foundItems);
-      console.log(foundItems);
-    });
-  });
+  //     res.json(foundItems);
+  //     console.log(foundItems);
+  //   });
+  // });
 
   // Should get all user items
 
@@ -259,17 +201,55 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/login', requireLogin, function(req, res, next){
+  // app.post('/api/login', function(req, res, next){
 
-    var User = mongoose.model('User');
-    var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
-      // console.log(req.params);
-      console.log(currentUser);
-      if(err){ return next(err); }
+  //   var User = mongoose.model('User');
+  //   var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
+  //     // console.log(req.params);
+  //     console.log(currentUser);
+  //     if(err){ return next(err); }
 
-    });
+  //     res.json(user);
+  //   });
+  // });
 
-  });
+  app.post('/api/sessions', function(req, res, next) {
+    User.findOne({username: req.body.username})
+    .select('password').select('username')
+    .exec( function(err, user){
+      if (err) {return next(err)}
+      if (!user) {return res.send(401)}
+      bcrypt.compare(req.body.password, user.password, function (err, valid){
+        if (err) {return next(err)}
+        if (!valid) {return res.send(401)}
+        var token = jwt.encode({username: user.username}, config.secret)
+      console.log(token);
+        res.send(token)
+      })
+    })
+  })
+
+  app.get('/api/users', function (req, res, next) {
+    if (!req.headers['x-auth']) {
+      return res.sendStatus(401)
+    }
+    var auth = jwt.decode(req.headers['x-auth'], config.secret)
+    User.findOne({username: auth.username}, function (err, user) {
+      if (err) { return next(err) }
+      res.json(user)
+    })
+  })
+
+  app.post('/api/users', function(req, res, next) {
+    var user = new User({username: req.body.username})
+    bcrypt.hash(req.body.password, 10, function (err, hash){
+      if (err) {return next (err)}
+      user.password = hash
+      user.save(function (err){
+        res.send(201)
+      })
+    })
+  })
 
 // should recive and update item stock
   app.post('/api/:storeType/items/:itemId', function(req, res, next){
@@ -302,6 +282,7 @@ module.exports = function(app) {
   });
 
 };
+
 
 
 
