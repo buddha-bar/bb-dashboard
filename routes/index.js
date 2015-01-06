@@ -59,6 +59,7 @@ module.exports = function(app) {
       res.json(body);
     });
   });
+  // update item quantity, will pass item id, quantity, and price
   app.get('/ebay/updateitem', function(req, res){
     daEbay.getEbayItemCount('stuuuuf', function(err, body){
       if(err){
