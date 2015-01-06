@@ -74,7 +74,7 @@ h1 {
 }
 
 .store-container {
-  /*height: 91vh;*/
+  min-height: 91vh;
   border-right: 1px solid #000;
   /*border-top: 1px solid #000;*/
   /*border-radius: 7px;*/
@@ -103,9 +103,10 @@ h1 {
 .item img {
   margin-right: 15px;
   float: left;
-  /*margin-bottom: 20px;*/
-  width: 80px;
-  height: 80px;
+  margin-top: 17px;
+  margin-bottom: 18px;
+  width: 90px;
+  height: 90px;
 }
 
 .add-stock input {
@@ -127,7 +128,7 @@ p.ng-binding {
 h3.ng-binding {
   font-size: 23px;
   font-weight: 200;
-  width: 80%;
+  width: 100%;
   margin: 0;
   padding-top: 10px;
   text-transform: capitalize;

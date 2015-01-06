@@ -144,7 +144,7 @@ module.exports = function(app) {
       // });
     });
     // redirect back to dashbaord; are we still getting information?
-    res.redirect('/#/dashboard');
+    res.redirect('/api/etsy/getListings');
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
@@ -181,15 +181,16 @@ module.exports = function(app) {
     // response with json representing item
   });
 
+
+
   app.get('/api/etsy/getListings',function(req, res){
-    //returns a list of active listings from the users shop.
-    // can do this and put call back in all listings instead  
-    // callback = function(err, body){
-    // };
     bEtsy.getAllListings(req, res, function(err, body) {
-      res.json(body);
+      // console.log(body);
+       //res.json(body);
     });
+    res.redirect('/#/dashboard');
   });
+
     // Potentially necesary for updating info in db.
     //   User.findOneAndUpdate({_id:'548e08ca89e002360ddb0d6d'}, {$push: {items: newitem}},
     //     {safe: true, upsert: true},
