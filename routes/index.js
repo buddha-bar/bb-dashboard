@@ -86,6 +86,9 @@ module.exports = function(app) {
       res.json(body);
     });
   });
+
+
+
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
       console.log(response);
@@ -158,20 +161,54 @@ module.exports = function(app) {
   });
 
 
-  app.post('/api/items/:itemId', function(req, res){
+  app.post('/api/etsy/items/:itemId', function(req, res){
     console.log("We're trying to update item #"+req.params.itemId);
-    bEtsy.updateItemCount(req.params.itemId, req.params.stockCount, function(err, body){
-      res.send(body.results[0]);
-      Item.findOne({_id: req.params.itemId}, function(err, user){
-        if (err) { return next(err); }
-        Item.stock = req.params.stockCount;
-        Item.save(function(err) {
-          if (err) { return next(err); }
+    Item.findOne({_id:req.params.itemId}, function(err, item){
+      if (err) { 
+        //return next(err); 
+        return err;
+      }
+      console.log(item);
+      bEtsy.updateItemCount(item.etsy.listingId, req.body.stock, function(err, body){
+        if (err) { 
+          //return next(err); 
+          return err;
+        }
+
+        item.stock = req.params.stockCount;
+        item.etsy.stock = req.params.stockCount;
+        item.save(function(err) {
+          if (err) { 
+            //return next(err);
+            return err;
+          } else {
+            res.json(body)
+          }
         });
       });
-
+      // item.stock = req.params.stockCount;
+      // item.etsy.stock = req.params.stockCount;
+      // item.save(function(err) {
+      //   if (err) { 
+      //     return next(err);
+      //   } else {
+      //     res.json(req.body)
+      //   }
+      // });
     });
-    res.json(req.body);
+    // })
+    //bEtsy.updateItemCount(etsyitem.etsy.ListingId, req.params.stockCount, function(err, body){
+      //res.send(body.results[0]);
+      // Item.findOne({_id: req.params.itemId}, function(err, user){
+      //   if (err) { return next(err); }
+      //   Item.stock = req.params.stockCount;
+      //   Item.save(function(err) {
+      //     if (err) { return next(err); }
+      //   });
+      // });
+      //ebay update as well. 
+    //});
+    //res.json(req.body);
 
     //Item.where({id: req.params.itemId})
 
@@ -300,34 +337,34 @@ module.exports = function(app) {
   })
 
 // should recive and update item stock
-  app.post('/api/:storeType/items/:itemId', function(req, res, next){
-    // console.log(req.params);
-    // console.log (req.params.itemId);
+  // app.post('/api/:storeType/items/:itemId', function(req, res, next){
+  //   // console.log(req.params);
+  //   // console.log (req.params.itemId);
 
-    var Item = mongoose.model('Item');
-    Item.findOne({_id: req.params.itemId}, function(err, item){
+  //   var Item = mongoose.model('Item');
+  //   Item.findOne({_id: req.params.itemId}, function(err, item){
 
-      // console.log(item);
+  //     // console.log(item);
 
-      // update item.stock to 300
-      // save the item
-      // respond with the item
+  //     // update item.stock to 300
+  //     // save the item
+  //     // respond with the item
 
-      item.stock = req.body.stock;
+  //     item.stock = req.body.stock;
 
-      item.save(function (err) {
-        // console.log('it worked');
+  //     item.save(function (err) {
+  //       // console.log('it worked');
         
-        res.json(item);
-      })
+  //       res.json(item);
+  //     })
 
-    });
+  //   });
 
     //item.find _id is passed
     //update and save
 
     //res.json({params: req.params});
-  });
+  //});
 
 };
 
