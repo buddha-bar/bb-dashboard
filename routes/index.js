@@ -42,8 +42,8 @@ module.exports = function(app) {
   // });
 //THE FOLLOWING ROUTES ARE SUPER ROUGH AND NOT IN WHATSOEVER MADE FOR REGAN....SORRY.
 //gets a specific item, the string will be substituted for req.params.itemid or whatever regan sends it
-  app.get('/ebay/item', function(req, res){
-    daEbay.getEbayItem('110154659744', function(err, body){
+  app.get('/ebay/getitem', function(req, res){
+    daEbay.getEbayItem('110154759051', function(err, body){
       if(err){
         console.log(err);
       }
@@ -53,6 +53,14 @@ module.exports = function(app) {
 //gets an items quantity, will be passed ItemID
   app.get('/ebay/item/count', function(req, res){
     daEbay.getEbayItemCount('loool', function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
+    });
+  });
+  app.get('/ebay/updateitem', function(req, res){
+    daEbay.getEbayItemCount('stuuuuf', function(err, body){
       if(err){
         console.log(err);
       }
