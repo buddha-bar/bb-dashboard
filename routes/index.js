@@ -185,19 +185,7 @@ module.exports = function(app) {
           }
         });
       });
-      // item.stock = req.params.stockCount;
-      // item.etsy.stock = req.params.stockCount;
-      // item.save(function(err) {
-      //   if (err) { 
-      //     return next(err);
-      //   } else {
-      //     res.json(req.body)
-      //   }
-      // });
     });
-    // })
-
-
     // use mongo to update database
 
     // #todo - make api calls as needed
@@ -213,75 +201,15 @@ module.exports = function(app) {
     });
     res.redirect('/#/dashboard');
   });
-
-    // Potentially necesary for updating info in db.
-    //   User.findOneAndUpdate({_id:'548e08ca89e002360ddb0d6d'}, {$push: {items: newitem}},
-    //     {safe: true, upsert: true},
-    //     function(err, model){ 
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     else {
-    //     console.dir("working");
-    //     }
-    //   });
-  
-
-
-
-  //regan estract data from db (temp)
-
-  // Should get all users
-  // app.get('api/users', function(req, res, next) {
-  //   var User = mongoose.model('User');
-  //   User.find(function(err, users){
-  //     if(err){ return next(err); }
-
-  //     res.json(users);
-  //     console.log(users);
-  //   });
-  // });
-
-  // Get user
-  // app.get('api/user', function(req, res, next) {
-  //   var User = mongoose.model('User');
-  //   User.find({username:'BillyBob'},function(err, foundItems){
-  //     if(err){ return next(err); }
-
-  //     res.json(foundItems);
-  //     console.log(foundItems);
-  //   });
-  // });
-
-  // Should get all user items
+ 
 
   app.get('/api/items', function(req, res, next) {
     var Item = mongoose.model('Item');
     Item.find(function(err, items){
       if(err){ return next(err); }
-
-      // var user = user[0];
-
-      // var items = user.items;
-      // items.forEach(function(item) {
-      //   item._id = mongoose.Types.ObjectId();
-      // });
-
       res.json(items);
     });
   });
-
-  // app.post('/api/login', function(req, res, next){
-
-  //   var User = mongoose.model('User');
-  //   var currentUser = User.findOne({ username: req.params.username, password: req.params.password}, function(err, user){
-  //     // console.log(req.params);
-  //     console.log(currentUser);
-  //     if(err){ return next(err); }
-
-  //     res.json(user);
-  //   });
-  // });
 
   app.post('/api/sessions', function(req, res, next) {
     User.findOne({username: req.body.username})
@@ -320,37 +248,6 @@ module.exports = function(app) {
       })
     })
   })
-
-// should recive and update item stock
-  // app.post('/api/:storeType/items/:itemId', function(req, res, next){
-  //   // console.log(req.params);
-  //   // console.log (req.params.itemId);
-
-  //   var Item = mongoose.model('Item');
-  //   Item.findOne({_id: req.params.itemId}, function(err, item){
-
-  //     // console.log(item);
-
-  //     // update item.stock to 300
-  //     // save the item
-  //     // respond with the item
-
-  //     item.stock = req.body.stock;
-
-  //     item.save(function (err) {
-  //       // console.log('it worked');
-        
-  //       res.json(item);
-  //     })
-
-  //   });
-
-    //item.find _id is passed
-    //update and save
-
-    //res.json({params: req.params});
-  //});
-
 };
 
 
