@@ -12,9 +12,8 @@ var daEbay = require('../lib/buddhaebay');
 var bcrypt =require('bcrypt');
 var jwt = require('jwt-simple');
 var config = require('../config');
-
+var puller = require('../lib/workers/puller')
 module.exports = function(app) {
-
   var User = mongoose.model('User');
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
@@ -197,20 +196,6 @@ module.exports = function(app) {
       // });
     });
     // })
-    //bEtsy.updateItemCount(etsyitem.etsy.ListingId, req.params.stockCount, function(err, body){
-      //res.send(body.results[0]);
-      // Item.findOne({_id: req.params.itemId}, function(err, user){
-      //   if (err) { return next(err); }
-      //   Item.stock = req.params.stockCount;
-      //   Item.save(function(err) {
-      //     if (err) { return next(err); }
-      //   });
-      // });
-      //ebay update as well. 
-    //});
-    //res.json(req.body);
-
-    //Item.where({id: req.params.itemId})
 
 
     // use mongo to update database
