@@ -76,17 +76,6 @@ module.exports = function(app) {
       res.json(body);
     });
   });
-//gets all items associated with a user, string will be substituted for req.params.ebay.authToken 
-  app.get('/ebay/allitems', function(req, res){
-    daEbay.getAllEbayListings('authtoken', function(err, body){
-      if(err){
-        console.log(err);
-      }
-      res.json(body);
-    });
-  });
-
-
 
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
@@ -198,6 +187,16 @@ module.exports = function(app) {
     bEtsy.getAllListings(req, res, function(err, body) {
       // console.log(body);
        //res.json(body);
+    });
+    res.redirect('/#/dashboard');
+  });
+  //gets all items associated with a user, string will be substituted for req.params.ebay.authToken 
+  app.get('/ebay/allitems', function(req, res){
+    daEbay.getAllEbayListings('authtoken', function(err, body){
+      if(err){
+        console.log(err);
+      }
+      res.json(body);
     });
     res.redirect('/#/dashboard');
   });
