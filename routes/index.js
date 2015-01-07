@@ -58,15 +58,7 @@ module.exports = function(app) {
       res.json(body);
     });
   });
-  // update item quantity, will pass item id, quantity, and price
-  app.get('/ebay/updateitem', function(req, res){
-    daEbay.getEbayItemCount('stuuuuf', function(err, body){
-      if(err){
-        console.log(err);
-      }
-      res.json(body);
-    });
-  });
+
 //gets a users ebay information, string will be substituted for req.params.ebay.authToken 
   app.get('/ebay/userinfo', function(req, res){
     daEbay.getUsersEbayInfo('authtoken', function(err, body){
@@ -174,6 +166,23 @@ module.exports = function(app) {
           }
         });
       });
+        // update item quantity, will pass item id, quantity, and price
+
+      // daEbay.getEbayItemCount(item.ebay.ItemID, req.body.stock, function(err, body){
+      //   if(err){
+      //     console.log(err);
+      //   }
+      //   item.ebay.quantity = req.body.stock;
+      //   item.save(function(err) {
+      //     if (err) { 
+      //       //return next(err);
+      //       return err;
+      //     } else {
+      //       res.json(body)
+      //     }
+      //   });
+      // });
+
     });
     // use mongo to update database
 

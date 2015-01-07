@@ -10,12 +10,14 @@ var Item = mongoose.Schema({
       listingId: String,
       stock: Number,
       etsystore: String,
+      image: String,
       store: String
     },
     ebay: {
       ItemID: String,
       quantity: Number,
       ebaystore: String,
+      image: String,
       store: String
     }
 });
