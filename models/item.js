@@ -18,6 +18,7 @@ var Item = mongoose.Schema({
       quantity: Number,
       ebaystore: String,
       image: String,
+      price: String,
       store: String
     }
 });

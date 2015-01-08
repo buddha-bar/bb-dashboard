@@ -17,7 +17,17 @@ module.exports = function(app) {
   var User = mongoose.model('User');
   var Item = mongoose.model('Item');
   var client = etsy.getClient();
-
+  function updateItem(item,cb){
+    Item.find({name : item.name}, function (err, docs) {
+      if (err){
+        cb('item exists already',null);
+      }else{
+        item.save(function(err){
+          cb(err,item);
+        });
+      }
+    });
+  }
   // 
 
   // app.get('/signup', function(req, res){
@@ -155,33 +165,35 @@ module.exports = function(app) {
           return err;
         }
 
-        item.stock = req.params.stockCount;
-        item.etsy.stock = req.params.stockCount;
-        item.save(function(err) {
-          if (err) { 
-            //return next(err);
-            return err;
-          } else {
-            res.json(body)
+        item.stock = body.results[0].quantity;
+        console.log(body.results[0].quantity);
+        item.etsy.stock = body.results[0].quantity;
+        console.log(item.etsy.stock);
+        updateItem(item, function(err2,item){
+          if (err2 || !item){
+              console.log('error updating item: ',err2);
+          }else{
+              console.log('item updated: ', item);
           }
-        });
+        })
       });
         // update item quantity, will pass item id, quantity, and price
-
-      // daEbay.getEbayItemCount(item.ebay.ItemID, req.body.stock, function(err, body){
-      //   if(err){
-      //     console.log(err);
-      //   }
-      //   item.ebay.quantity = req.body.stock;
-      //   item.save(function(err) {
-      //     if (err) { 
-      //       //return next(err);
-      //       return err;
-      //     } else {
-      //       res.json(body)
-      //     }
-      //   });
-      // });
+        console.log("Before ebay");
+      daEbay.updateEbayItemCount(item.ebay.ItemID, req.body.stock, function(err, body){
+        if(err){
+          console.log(err);
+        }
+        console.log("In ebay");
+        console.log(body);
+        item.ebay.quantity = body.Quantity;
+        updateItem(item, function(err2,item){
+          if (err2 || !item){
+              console.log('error updating item: ',err2);
+          }else{
+              console.log('item updated: ');
+          }
+        })
+      });
 
     });
     // use mongo to update database
