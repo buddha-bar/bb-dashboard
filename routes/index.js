@@ -142,7 +142,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/etsy/getItemCount',function(req, res){
-    bEtsy.getItemCount(req.params.itemID, function(err, body){
+    bEtsy.getItemCount('216614188', function(err, body){
       if(err){
         console.log(err);
       }
@@ -155,59 +155,59 @@ module.exports = function(app) {
     console.log("We're trying to update item #"+req.params.itemId);
     Item.findOne({_id:req.params.itemId}, function(err, item){
       if (err) { 
-        //return next(err); 
         return err;
       }
-      console.log(item);
-      bEtsy.updateItemCount(item.etsy.listingId, req.body.stock, function(err, body){
-        if (err) { 
-          //return next(err); 
-          return err;
-        }
-
-        item.stock = body.results[0].quantity;
-        console.log(body.results[0].quantity);
-        item.etsy.stock = body.results[0].quantity;
-        console.log(item.etsy.stock);
-        updateItem(item, function(err2,item){
-          if (err2 || !item){
-              console.log('error updating item: ',err2);
-          }else{
-              console.log('item updated: ', item);
+      else{
+        console.log(item);
+        bEtsy.updateItemCount(item.etsy.listingId, req.body.stock, function(err, body){
+          if (err) { 
+            return err;
           }
-        })
-      });
-        // update item quantity, will pass item id, quantity, and price
-        console.log("Before ebay");
-      daEbay.updateEbayItemCount(item.ebay.ItemID, req.body.stock, function(err, body){
-        if(err){
-          console.log(err);
-        }
-        console.log("In ebay");
-        console.log(body);
-        item.ebay.quantity = body.Quantity;
-        updateItem(item, function(err2,item){
-          if (err2 || !item){
-              console.log('error updating item: ',err2);
-          }else{
-              console.log('item updated: ');
+          else{
+            item.stock = body.results[0].quantity;
+            console.log(body.results[0].quantity);
+            item.etsy.stock = body.results[0].quantity;
+            console.log(item.etsy.stock);
+            updateItem(item, function(err2,item){
+              if (err2 || !item){
+                  console.log('error updating item: ',err2);
+              }else{
+                  console.log('item updated: ', item);
+              }
+            })
           }
-        })
-      });
-
+        });
+          // update item quantity, will pass item id, quantity, and price
+          console.log("Before ebay");
+        daEbay.updateEbayItemCount(item.ebay.ItemID, req.body.stock, item.ebay.price, function(err, body){
+          if(err){
+            return err;
+          }
+          else{
+            item.ebay.quantity = body.Quantity;
+            updateItem(item, function(err2,item){
+              if (err2 || !item){
+                  console.log('error updating item: ',err2);
+              }else{
+                  console.log('item updated: ');
+              }
+            })
+          }
+        });
+      }
     });
-    // use mongo to update database
-
-    // #todo - make api calls as needed
-    // response with json representing item
   });
 
 
 
   app.get('/api/etsy/getListings',function(req, res){
     bEtsy.getAllListings(req, res, function(err, body) {
-      // console.log(body);
-       //res.json(body);
+      if (err) {
+        return err;
+      }
+      else {
+        return body;
+      }
     });
     res.redirect('/#/dashboard');
   });
@@ -215,9 +215,11 @@ module.exports = function(app) {
   app.get('/ebay/allitems', function(req, res){
     daEbay.getAllEbayListings('authtoken', function(err, body){
       if(err){
-        console.log(err);
+        return(err);
       }
-      res.json(body);
+      else{
+        res.json(body);
+      }
     });
     res.redirect('/#/dashboard');
   });
