@@ -68,11 +68,25 @@ h1 {
 
 .fa-refresh {
   margin-left: 10px;
+  color: #fff;
 }
-.white {
-  background-color: #fff;
+.blue {
+  background-color: #244E61;
 }
 
+.blue h3.ng-binding {
+  color: #fff;
+}
+
+.blue p.ng-binding {
+  color: #fff;
+}
+.store-container.blue h1 {
+  color: #eee;
+}
+.blue .postfix.button {
+  background-color: #7fa583;
+}
 .store-container {
   min-height: 91vh;
   border-right: 1px solid #000;
