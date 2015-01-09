@@ -27,7 +27,7 @@ module.exports = function(app) {
         });
       }
     });
-  }
+  };
   // 
 
   // app.get('/signup', function(req, res){
@@ -189,7 +189,7 @@ module.exports = function(app) {
               if (err2 || !item){
                   console.log('error updating item: ',err2);
               }else{
-                  console.log('item updated: ');
+                  console.log('item updated: ',item.name);
               }
             })
           }
@@ -247,7 +247,7 @@ module.exports = function(app) {
         res.send(token)
       })
     })
-  })
+  });
 
   app.get('/api/users', function (req, res, next) {
     if (!req.headers['x-auth']) {
@@ -258,7 +258,7 @@ module.exports = function(app) {
       if (err) { return next(err) }
       res.json(user)
     })
-  })
+  });
 
   app.post('/api/users', function(req, res, next) {
     var user = new User({username: req.body.username})
@@ -269,7 +269,7 @@ module.exports = function(app) {
         res.send(201)
       })
     })
-  })
+  });
 };
 
 
