@@ -81,7 +81,7 @@ module.exports = function(app) {
 
   app.get('/etsy', function(req, res) {
     client.requestToken(function(err, response) {
-      console.log(response);
+      console.log("the etsy response is: ",response);
       if (err) {
         return console.log(err);
       }
@@ -215,6 +215,7 @@ module.exports = function(app) {
   app.get('/ebay/allitems', function(req, res){
     daEbay.getAllEbayListings('authtoken', function(err, body){
       if(err){
+        console.log(err);
         return(err);
       }
       else{

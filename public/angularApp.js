@@ -243,7 +243,7 @@ app.directive('modalDialog', function() {
       $window.location.href = 'http://localhost:3000/amazon';
     }
     $scope.goEbay = function() {
-      $window.location.href = 'http://localhost:3000/ebay';
+      $window.location.href = 'http://localhost:3000/ebay/allitems';
     }
   });
 
